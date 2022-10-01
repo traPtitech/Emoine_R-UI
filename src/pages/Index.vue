@@ -1,3 +1,1 @@
-<template>
-  Emoine
-</template>
+<template>Emoine</template>
