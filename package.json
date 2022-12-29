@@ -6,7 +6,8 @@
     "build": "vite build",
     "lint": "eslint --ext .ts,.vue src",
     "type-check": "tsc",
-    "gen-api": "node ./scripts/gen-api.js"
+    "gen-api": "node ./scripts/gen-api.js",
+    "postinstall": "npm run gen-api"
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.11",
