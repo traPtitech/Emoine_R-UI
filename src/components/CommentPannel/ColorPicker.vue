@@ -21,10 +21,13 @@ const pickColor = (color: string) => {
       :key="color"
       :class="$style.button"
       :style="{
-        backgroundColor: color
+        backgroundColor: color,
+        position: modelValue === color ? 'relative' : 'static'
       }"
       @click="pickColor(color)"
-    />
+    >
+      <div :class="$style.cover" />
+    </button>
   </div>
 </template>
 
@@ -39,6 +42,15 @@ const pickColor = (color: string) => {
   height: 24px;
   border-radius: 50%;
   border: 1px solid #bbbbbb;
-  //todo:選択されたときに中央のopacityを0.2に
+}
+.cover {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  background-color: #000000;
+  opacity: 0.2;
+  border-radius: 50%;
 }
 </style>
