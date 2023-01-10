@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import CommentList from '@/components/CommentPannel/CommentList.vue'
+import { Comment } from '@/lib/apis/generated'
+import CommentControls from '@/components/CommentPannel/CommentControls.vue'
+import CommentPanelHeader from '@/components/CommentPannel/CommentPanelHeader.vue'
+
+defineProps<{
+  comments: Comment[]
+  shouldShowCommentsOnScreen: boolean
+}>()
+const emit = defineEmits<{
+  (e: 'toggleShowCommentsOnScreen', value: boolean): void
+  (e: 'closeCommentPannel'): void
+}>()
+</script>
+
+<template>
+  <div :class="$style.commentPannel">
+    <comment-panel-header
+      :should-show-comments-on-screen="shouldShowCommentsOnScreen"
+      @toggle-show-comments-on-screen="
+        emit('toggleShowCommentsOnScreen', $event)
+      "
+      @close-comment-pannel="emit('closeCommentPannel')"
+    />
+    <div :class="$style.commentList">
+      <comment-list :comments="comments" />
+    </div>
+    <comment-controls />
+  </div>
+</template>
+
+<style lang="scss" module>
+.commentPannel {
+  width: 340px;
+  height: 100vh;
+  border: 1px solid #bbbbbb;
+}
+.commentList {
+  height: calc(100% - 160px);
+  overflow-y: scroll;
+}
+</style>

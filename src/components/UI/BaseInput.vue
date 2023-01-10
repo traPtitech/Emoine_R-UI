@@ -30,7 +30,7 @@ const value = computed({
 <style lang="scss" module>
 .input {
   background-color: white;
-  padding: 0.75rem 0.675rem;
+  padding: 0.5rem 0.675rem;
   border-radius: 4px;
 }
 </style>
