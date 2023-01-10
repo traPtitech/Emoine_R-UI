@@ -2,7 +2,7 @@
 type ButtonType = 'primary'
 const props = withDefaults(
   defineProps<{
-    type: ButtonType
+    type?: ButtonType
     disabled?: boolean
   }>(),
   { type: 'primary' }

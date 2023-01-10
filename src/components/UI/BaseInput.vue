@@ -5,11 +5,10 @@ const props = withDefaults(
   defineProps<{
     modelValue: string
     placeholder?: string
-    haveStampPicker: boolean
+    haveStampPicker?: boolean
   }>(),
   {
-    placeholder: '',
-    haveStampPicker: false
+    placeholder: ''
   }
 )
 const emit = defineEmits<{

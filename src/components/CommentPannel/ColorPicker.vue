@@ -26,7 +26,7 @@ const pickColor = (color: string) => {
       }"
       @click="pickColor(color)"
     >
-      <div :class="$style.cover" />
+      <div v-if="modelValue === color" :class="$style.cover" />
     </button>
   </div>
 </template>
