@@ -23,9 +23,7 @@ const emit = defineEmits<{
       "
       @close-comment-pannel="emit('closeCommentPannel')"
     />
-    <div :class="$style.commentList">
-      <comment-list :comments="comments" />
-    </div>
+    <comment-list :comments="comments" />
     <comment-controls />
   </div>
 </template>
@@ -35,9 +33,5 @@ const emit = defineEmits<{
   width: 340px;
   height: 100vh;
   border: 1px solid #bbbbbb;
-}
-.commentList {
-  height: calc(100% - 160px);
-  overflow-y: scroll;
 }
 </style>
