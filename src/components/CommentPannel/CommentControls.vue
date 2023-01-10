@@ -39,7 +39,7 @@ const sendComment = () => {
   width: 100%;
 }
 .commentControls {
-  background-color: #f6f6f6;
+  background-color: $background-primary;
   padding: 10px;
   height: 110px;
 }

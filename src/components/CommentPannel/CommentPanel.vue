@@ -9,7 +9,7 @@ defineProps<{
   shouldShowCommentsOnScreen: boolean
 }>()
 const emit = defineEmits<{
-  (e: 'toggleShowCommentsOnScreen', value: boolean): void
+  (e: 'toggleShowCommentsOnScreen'): void
   (e: 'closeCommentPannel'): void
 }>()
 </script>
@@ -18,9 +18,7 @@ const emit = defineEmits<{
   <div :class="$style.commentPannel">
     <comment-panel-header
       :should-show-comments-on-screen="shouldShowCommentsOnScreen"
-      @toggle-show-comments-on-screen="
-        emit('toggleShowCommentsOnScreen', $event)
-      "
+      @toggle-show-comments-on-screen="emit('toggleShowCommentsOnScreen')"
       @close-comment-pannel="emit('closeCommentPannel')"
     />
     <comment-list :comments="comments" />
@@ -32,6 +30,6 @@ const emit = defineEmits<{
 .commentPannel {
   width: 340px;
   height: 100vh;
-  border: 1px solid #bbbbbb;
+  border: 1px solid $color-secondary;
 }
 </style>

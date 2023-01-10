@@ -23,7 +23,7 @@ const emit = defineEmits<{
   align-items: center;
   height: 50px;
   padding: 1.25rem;
-  background-color: #f6f6f6;
-  border-bottom: #bbbbbb solid 1px;
+  background-color: $background-primary;
+  border-bottom: $color-secondary solid 1px;
 }
 </style>

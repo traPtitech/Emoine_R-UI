@@ -38,7 +38,7 @@ const pickColor = (color: string) => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid #bbbbbb;
+  border: 1px solid $color-secondary;
   //todo:選択されたときに中央のopacityを0.2に
 }
 </style>
