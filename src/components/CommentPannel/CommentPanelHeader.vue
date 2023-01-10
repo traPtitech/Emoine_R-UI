@@ -3,18 +3,14 @@ defineProps<{
   shouldShowCommentsOnScreen: boolean
 }>()
 const emit = defineEmits<{
-  (e: 'toggleShowCommentsOnScreen', value: boolean): void
+  (e: 'toggleShowCommentsOnScreen'): void
   (e: 'closeCommentPannel'): void
 }>()
 </script>
 
 <template>
   <div :class="$style.container">
-    <button
-      @click="emit('toggleShowCommentsOnScreen', !shouldShowCommentsOnScreen)"
-    >
-      *
-    </button>
+    <button @click="emit('toggleShowCommentsOnScreen')">*</button>
     <p>コメント</p>
     <button @click="emit('closeCommentPannel')">*</button>
   </div>
