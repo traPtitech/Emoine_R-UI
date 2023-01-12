@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Comment } from '@/lib/apis/generated'
-import CommentItem from '@/components/CommentPannel/CommentItem.vue'
+import CommentItem from '@/components/CommentPanel/CommentItem.vue'
 
 defineProps<{
   comments: Comment[]

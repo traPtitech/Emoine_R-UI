@@ -1,18 +1,18 @@
 <script setup lang="ts">
 defineProps<{
-  shouldShowCommentsOnScreen: boolean
+  showOverlay: boolean
 }>()
 const emit = defineEmits<{
-  (e: 'toggleShowCommentsOnScreen'): void
-  (e: 'closeCommentPannel'): void
+  (e: 'toggleShowOverlay'): void
+  (e: 'popupCommentPanel'): void
 }>()
 </script>
 
 <template>
   <div :class="$style.container">
-    <button @click="emit('toggleShowCommentsOnScreen')">*</button>
+    <button @click="emit('toggleShowOverlay')">*</button>
     <p>コメント</p>
-    <button @click="emit('closeCommentPannel')">*</button>
+    <button @click="emit('popupCommentPanel')">*</button>
   </div>
 </template>
 

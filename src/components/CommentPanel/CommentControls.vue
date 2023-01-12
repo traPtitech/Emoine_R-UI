@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
-import ColorPicker from '@/components/CommentPannel/ColorPicker.vue'
+import ColorPicker from '@/components/CommentPanel/ColorPicker.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import type { TextColor } from '@/consts/colors'
 
