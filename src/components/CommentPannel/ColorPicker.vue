@@ -26,9 +26,7 @@ const pickColor = (color: TextColor) => {
       }"
       :data-is-picked="modelValue === color"
       @click="pickColor(color)"
-    >
-      <!-- <div v-if="modelValue === color" :class="$style.cover" /> -->
-    </button>
+    />
   </div>
 </template>
 
@@ -58,15 +56,5 @@ const pickColor = (color: TextColor) => {
       border-radius: 50%;
     }
   }
-}
-.cover {
-  width: 1rem;
-  height: 1rem;
-  position: absolute;
-  top: 0.1875rem;
-  left: 0.1875rem;
-  background-color: #000000;
-  opacity: 0.2;
-  border-radius: 50%;
 }
 </style>
