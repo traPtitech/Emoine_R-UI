@@ -29,7 +29,9 @@ const value = computed({
 <style lang="scss" module>
 .input {
   background-color: white;
-  padding: 0.75rem 0.675rem;
+  padding: 0.75rem 0.625rem;
   border-radius: 4px;
+  height: 40px;
+  font-size: 14px;
 }
 </style>

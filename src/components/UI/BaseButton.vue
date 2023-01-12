@@ -21,6 +21,8 @@ const props = withDefaults(
   background-color: #ff007f;
   border-radius: 4px;
   padding: 0.5rem;
+  height: 30px;
+  font-size: 12px;
 
   &:hover {
     opacity: 0.7;
