@@ -39,17 +39,17 @@ const pickColor = (color: TextColor) => {
   gap: 0.25rem;
 }
 .button {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   border: 1px solid #bbbbbb;
 }
 .cover {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 0.1875rem;
+  left: 0.1875rem;
   background-color: #000000;
   opacity: 0.2;
   border-radius: 50%;

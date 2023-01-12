@@ -19,10 +19,10 @@ const props = withDefaults(
 .button {
   color: white;
   background-color: #ff007f;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   padding: 0.5rem;
-  height: 30px;
-  font-size: 12px;
+  height: 1.875rem;
+  font-size: 0.75rem;
 
   &:hover {
     opacity: 0.7;

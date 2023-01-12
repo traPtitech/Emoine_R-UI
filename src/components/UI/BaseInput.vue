@@ -30,8 +30,8 @@ const value = computed({
 .input {
   background-color: white;
   padding: 0.75rem 0.625rem;
-  border-radius: 4px;
-  height: 40px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
 }
 </style>

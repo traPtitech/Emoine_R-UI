@@ -43,7 +43,7 @@ const sendComment = () => {
 }
 .commentControls {
   background-color: #f6f6f6;
-  padding: 10px;
+  padding: 0.625rem;
 }
 .lowerControls {
   display: flex;
