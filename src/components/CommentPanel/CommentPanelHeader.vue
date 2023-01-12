@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AIcon from '@/components/UI/AIcon.vue'
+
 defineProps<{
   showOverlay: boolean
 }>()
@@ -10,9 +12,17 @@ const emit = defineEmits<{
 
 <template>
   <div :class="$style.container">
-    <button @click="emit('toggleShowOverlay')">*</button>
+    <button
+      :class="$style.showOverlayButton"
+      :data-show-overlay="showOverlay"
+      @click="emit('toggleShowOverlay')"
+    >
+      <a-icon name="" />
+    </button>
     <p>コメント</p>
-    <button @click="emit('popupCommentPanel')">*</button>
+    <button :class="$style.popupButton" @click="emit('popupCommentPanel')">
+      <a-icon name="" />
+    </button>
   </div>
 </template>
 
@@ -25,5 +35,14 @@ const emit = defineEmits<{
   padding: 1.25rem;
   background-color: $background-primary;
   border-bottom: $color-secondary solid 1px;
+}
+.showOverlayButton {
+  color: $color-secondary;
+  &[data-show-overlay='true'] {
+    color: $color-primary;
+  }
+}
+.popupButton {
+  color: $color-secondary;
 }
 </style>
