@@ -22,12 +22,12 @@ const pickColor = (color: TextColor) => {
       :key="color"
       :class="$style.button"
       :style="{
-        backgroundColor: color,
-        position: modelValue === color ? 'relative' : 'static'
+        backgroundColor: color
       }"
+      :data-is-picked="modelValue === color"
       @click="pickColor(color)"
     >
-      <div v-if="modelValue === color" :class="$style.cover" />
+      <!-- <div v-if="modelValue === color" :class="$style.cover" /> -->
     </button>
   </div>
 </template>
@@ -43,6 +43,21 @@ const pickColor = (color: TextColor) => {
   height: 1.5rem;
   border-radius: 50%;
   border: 1px solid #bbbbbb;
+
+  &[data-is-picked='true'] {
+    position: relative;
+    &::before {
+      content: '';
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      top: 0.1875rem;
+      left: 0.1875rem;
+      background-color: #000000;
+      opacity: 0.2;
+      border-radius: 50%;
+    }
+  }
 }
 .cover {
   width: 1rem;
