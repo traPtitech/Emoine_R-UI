@@ -19,7 +19,6 @@ defineProps<{
 
 <style lang="scss" module>
 .container {
-  height: calc(100% - 160px);
   overflow-y: scroll;
 }
 .commentList {

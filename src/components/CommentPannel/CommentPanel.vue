@@ -21,15 +21,18 @@ const emit = defineEmits<{
       @toggle-show-comments-on-screen="emit('toggleShowCommentsOnScreen')"
       @close-comment-pannel="emit('closeCommentPannel')"
     />
-    <comment-list :comments="comments" />
+    <comment-list :comments="comments" :class="$style.commentList" />
     <comment-controls />
   </div>
 </template>
 
 <style lang="scss" module>
+.commentList {
+  height: calc(100% - 160px);
+}
 .commentPannel {
   width: 340px;
   height: 100vh;
-  border: 1px solid $color-secondary;
+  border-left: 1px solid $color-secondary;
 }
 </style>

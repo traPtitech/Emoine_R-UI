@@ -44,7 +44,7 @@ const sendComment = () => {
 .commentControls {
   background-color: $background-primary;
   padding: 0.625rem;
-  height: 6.25rem;
+  height: 110px;
 }
 .lowerControls {
   display: flex;
