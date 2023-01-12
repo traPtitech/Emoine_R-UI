@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
 import ColorPicker from '@/components/CommentPannel/ColorPicker.vue'
+import AIcon from '@/components/UI/AIcon.vue'
 
 const commentValue = ref('')
 const pickedColor = ref('')
@@ -26,8 +27,9 @@ const sendComment = () => {
     <div :class="$style.lowerControls">
       <color-picker v-model="pickedColor" />
       <div :class="$style.rightControls">
-        <!--todo:アイコン-->
-        <button @click="toggleIsAnonymous">*</button>
+        <button @click="toggleIsAnonymous">
+          <a-icon :name="isAnonymous ? 'mdi:incognito' : 'mdi:incognito-off'" />
+        </button>
         <base-button @click="sendComment">コメント</base-button>
       </div>
     </div>
@@ -51,5 +53,6 @@ const sendComment = () => {
 .rightControls {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
 }
 </style>
