@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import { textColors } from '@/consts/colors'
+import type { TextColor } from '@/consts/colors'
+
 defineProps<{
   modelValue: string
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value: TextColor): void
 }>()
 
-const colors = ['#FF007F', '#00FFFF', '#00FF00', '#FFFF00', '#FFFFFF']
-
-const pickColor = (color: string) => {
+const pickColor = (color: TextColor) => {
   emit('update:modelValue', color)
 }
 </script>
@@ -17,14 +18,17 @@ const pickColor = (color: string) => {
 <template>
   <div :class="$style.container">
     <button
-      v-for="color in colors"
+      v-for="color in textColors"
       :key="color"
       :class="$style.button"
       :style="{
-        backgroundColor: color
+        backgroundColor: color,
+        position: modelValue === color ? 'relative' : 'static'
       }"
       @click="pickColor(color)"
-    />
+    >
+      <div v-if="modelValue === color" :class="$style.cover" />
+    </button>
   </div>
 </template>
 
@@ -35,10 +39,19 @@ const pickColor = (color: string) => {
   gap: 0.25rem;
 }
 .button {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   border: 1px solid $color-secondary;
-  //todo:選択されたときに中央のopacityを0.2に
+}
+.cover {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  background-color: #000000;
+  opacity: 0.2;
+  border-radius: 50%;
 }
 </style>

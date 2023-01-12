@@ -2,7 +2,7 @@
 type ButtonType = 'primary'
 const props = withDefaults(
   defineProps<{
-    type: ButtonType
+    type?: ButtonType
     disabled?: boolean
   }>(),
   { type: 'primary' }
@@ -19,8 +19,10 @@ const props = withDefaults(
 .button {
   color: white;
   background-color: $color-primary;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   padding: 0.5rem;
+  height: 1.875rem;
+  font-size: 0.75rem;
 
   &:hover {
     opacity: 0.7;

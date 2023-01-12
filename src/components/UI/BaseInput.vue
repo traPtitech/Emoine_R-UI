@@ -5,11 +5,10 @@ const props = withDefaults(
   defineProps<{
     modelValue: string
     placeholder?: string
-    haveStampPicker: boolean
+    haveStampPicker?: boolean
   }>(),
   {
-    placeholder: '',
-    haveStampPicker: false
+    placeholder: ''
   }
 )
 const emit = defineEmits<{
@@ -30,7 +29,9 @@ const value = computed({
 <style lang="scss" module>
 .input {
   background-color: white;
-  padding: 0.5rem 0.675rem;
-  border-radius: 4px;
+  padding: 0.75rem 0.625rem;
+  border-radius: 0.25rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
 }
 </style>
