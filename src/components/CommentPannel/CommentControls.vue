@@ -4,9 +4,10 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
 import ColorPicker from '@/components/CommentPannel/ColorPicker.vue'
 import AIcon from '@/components/UI/AIcon.vue'
+import type { TextColor } from '@/consts/colors'
 
 const commentValue = ref('')
-const pickedColor = ref('')
+const pickedColor = ref<TextColor>('#000000')
 const isAnonymous = ref(false)
 
 const toggleIsAnonymous = () => {
