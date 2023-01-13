@@ -18,7 +18,7 @@ const props = withDefaults(
 <style lang="scss" module>
 .button {
   color: white;
-  background-color: #ff007f;
+  background-color: $color-primary;
   border-radius: 0.25rem;
   padding: 0.5rem;
   height: 1.875rem;

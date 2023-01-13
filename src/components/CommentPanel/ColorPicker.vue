@@ -40,7 +40,7 @@ const pickColor = (color: TextColor) => {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  border: 1px solid #bbbbbb;
+  border: 1px solid $color-secondary;
 
   &[data-is-picked='true'] {
     position: relative;
