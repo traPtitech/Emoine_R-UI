@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.11",
+    "@iconify/vue": "^4.0.2",
     "axios": "^0.27.2",
     "direct-vuex": "^0.12.1",
     "reconnecting-websocket": "^4.4.0",
