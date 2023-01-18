@@ -5,10 +5,12 @@ import path from 'path'
 const devHost = 'localhost:3050'
 const prodHost = process.env.HOST
 
+const srcPath = path.resolve(__dirname, 'src').replace(/\\/g, '/')
+
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src').replace(/\\/g, '/')
+      '@': srcPath
     }
   },
   define: {
@@ -19,6 +21,13 @@ export default defineConfig({
       '/api': {
         target: `http://${devHost}`,
         changeOrigin: true
+      }
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "${srcPath}/styles/common.scss";`
       }
     }
   },
