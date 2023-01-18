@@ -24,6 +24,13 @@ const pageButtons = computed(() => {
 <template>
   <div :class="$style.container">
     <router-link
+      :to="`?page=1`"
+      :class="$style.linkButton"
+      :disabled="currentPage === 1"
+    >
+      <a-icon name="mdi:chevron-double-left" :class="$style.chevronIcon" />
+    </router-link>
+    <router-link
       :to="`?page=${currentPage - 1}`"
       :class="$style.linkButton"
       :disabled="currentPage === 1"
@@ -49,6 +56,13 @@ const pageButtons = computed(() => {
       :disabled="currentPage === totalPages"
     >
       <a-icon name="mdi:chevron-right" :class="$style.chevronIcon" />
+    </router-link>
+    <router-link
+      :to="`?page=${totalPages}`"
+      :class="$style.linkButton"
+      :disabled="currentPage === totalPages"
+    >
+      <a-icon name="mdi:chevron-double-right" :class="$style.chevronIcon" />
     </router-link>
   </div>
 </template>
