@@ -37,7 +37,6 @@ defineProps<{ meeting: Meeting }>()
 }
 
 .title {
-  font-size: 0.9375rem;
   font-weight: bold;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -46,7 +45,7 @@ defineProps<{ meeting: Meeting }>()
 }
 
 .description {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
