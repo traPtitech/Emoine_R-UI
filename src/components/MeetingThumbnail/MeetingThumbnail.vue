@@ -12,8 +12,8 @@ defineProps<{ meeting: Meeting }>()
     <!-- TODO: 日付コンポーネントを表示する -->
     <img :src="meeting.thumbnail" :alt="`${meeting.title}のサムネイル画像`" />
     <div :class="$style.textContainer">
-      <div :class="$style.title">{{ meeting.title }}</div>
-      <div :class="$style.description">{{ meeting.description }}</div>
+      <p :class="$style.title">{{ meeting.title }}</p>
+      <p :class="$style.description">{{ meeting.description }}</p>
     </div>
   </router-link>
 </template>
