@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
 interface Props {
   currentPage: number
   totalPages: number
+  constructLink: (page: number) => string
 }
 
 const props = defineProps<Props>()
@@ -24,14 +25,14 @@ const pageButtons = computed(() => {
 <template>
   <div :class="$style.container">
     <router-link
-      :to="`?page=1`"
+      :to="constructLink(1)"
       :class="$style.linkButton"
       :disabled="currentPage === 1"
     >
       <a-icon name="mdi:chevron-double-left" :class="$style.chevronIcon" />
     </router-link>
     <router-link
-      :to="`?page=${currentPage - 1}`"
+      :to="constructLink(currentPage - 1)"
       :class="$style.linkButton"
       :disabled="currentPage === 1"
     >
@@ -44,21 +45,21 @@ const pageButtons = computed(() => {
         :key="page"
         :class="$style.linkButton"
         :disabled="page === currentPage"
-        :to="`?page=${page}`"
+        :to="constructLink(page)"
       >
         {{ page }}
       </router-link>
     </div>
 
     <router-link
-      :to="`?page=${currentPage + 1}`"
+      :to="constructLink(currentPage + 1)"
       :class="$style.linkButton"
       :disabled="currentPage === totalPages"
     >
       <a-icon name="mdi:chevron-right" :class="$style.chevronIcon" />
     </router-link>
     <router-link
-      :to="`?page=${totalPages}`"
+      :to="constructLink(totalPages)"
       :class="$style.linkButton"
       :disabled="currentPage === totalPages"
     >
