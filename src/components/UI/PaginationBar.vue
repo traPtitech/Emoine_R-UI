@@ -5,18 +5,21 @@ import { RouterLink } from 'vue-router'
 
 interface Props {
   currentPage: number
-  totalPages: number
+  totalPage: number
   constructLink: (page: number) => string
 }
 
 const props = defineProps<Props>()
 
 const pageButtons = computed(() => {
+  if (props.totalPage <= 5) {
+    return [...Array(props.totalPage).keys()].map(i => i + 1)
+  }
   if (props.currentPage <= 3) {
     return [...Array(5).keys()].map(i => i + 1)
   }
-  if (props.currentPage >= props.totalPages - 2) {
-    return [...Array(5).keys()].map(i => i + props.totalPages - 4)
+  if (props.currentPage >= props.totalPage - 2) {
+    return [...Array(5).keys()].map(i => i + props.totalPage - 4)
   }
   return [...Array(5).keys()].map(i => i - 2 + props.currentPage)
 })
@@ -54,14 +57,14 @@ const pageButtons = computed(() => {
     <router-link
       :to="constructLink(currentPage + 1)"
       :class="$style.linkButton"
-      :disabled="currentPage === totalPages"
+      :disabled="currentPage === totalPage"
     >
       <a-icon name="mdi:chevron-right" :class="$style.chevronIcon" />
     </router-link>
     <router-link
-      :to="constructLink(totalPages)"
+      :to="constructLink(totalPage)"
       :class="$style.linkButton"
-      :disabled="currentPage === totalPages"
+      :disabled="currentPage === totalPage"
     >
       <a-icon name="mdi:chevron-double-right" :class="$style.chevronIcon" />
     </router-link>
