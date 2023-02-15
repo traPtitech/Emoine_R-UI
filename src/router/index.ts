@@ -5,6 +5,12 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Index',
     component: () => import('@/pages/Index.vue')
+  },
+  {
+    path: '/meeting/:id',
+    name: 'Meeting',
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    component: () => {} // TODO: ページ作成したらここに書く
   }
 ]
 
