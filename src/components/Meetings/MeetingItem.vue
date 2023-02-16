@@ -14,7 +14,11 @@ defineProps<{
       <img :src="meeting.thumbnail" :class="$style.thumbnail" />
       <div :class="$style.leftContainer">
         <p :class="$style.title">{{ meeting.title }}</p>
-        <a-icon name="" />
+        <a-icon
+          name="tabler:certificate"
+          :zise="32"
+          :class="$style.certificateIcon"
+        />
       </div>
       <div :class="$style.middleContainer">
         <p :class="$style.videoId">{{ meeting.video_id }}</p>
@@ -42,8 +46,8 @@ defineProps<{
 .leftContainer {
   display: flex;
   align-items: center;
+  flex-grow: 2;
   border-right: 1px solid $color-secondary;
-  width: 70%;
   height: 70%;
 }
 .thumbnail {
@@ -55,6 +59,10 @@ defineProps<{
   font-weight: bold;
   margin-left: 20px;
   color: $text-primary;
+  flex-grow: 2;
+}
+.certificateIcon {
+  margin-right: 20px;
 }
 .middleContainer {
   display: flex;
