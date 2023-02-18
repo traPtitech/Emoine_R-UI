@@ -1,3 +1,3 @@
-import { tests } from '@/mocks/test'
+import { meetings } from './meetings'
 
-export const handlers = [tests].flat()
+export const handlers = [meetings].flat()
