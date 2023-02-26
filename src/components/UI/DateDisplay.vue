@@ -1,43 +1,54 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-const days = ref(0)
+import { computed } from 'vue'
+
+type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
 const props = defineProps<{
-  time: Date
+  startedTime: Date
+  endedTime: Date
 }>()
 
-const text = computed(() => {
-  if (days.value >= 365) return `${Math.floor(days.value / 365)}年前`
-  else if (days.value >= 31) return `${Math.floor(days.value / 30.42)}ヶ月前`
-  else if (days.value >= 1) return `${days.value}日前`
-  else if (days.value == 0) return 'LIVE'
-  else return (props.time.getMonth()+1) + '/' + props.time.getDate()
+const status = computed((): LiveStatus => {
+  if (new Date().getTime() < props.startedTime.getTime()) return 'isPlanned'
+  if (isNaN(props.endedTime.getTime())) return 'isStreaming'
+  return 'isArchived'
 })
 
-function calcDiff() {
-  console.log(props.time, `props`);
-  if (!props.time) return;
-  const prevTime = props.time.getTime();
-  const diff = new Date().getTime() - prevTime;
-  days.value = Math.floor(diff / (1000 * 60 * 60 * 24));
-}
+const text = computed(() => {
+  switch (status.value) {
+    case 'isPlanned':
+      return `${
+        props.startedTime.getMonth() + 1
+      }/${props.startedTime.getDate()}`
+    case 'isStreaming':
+      return 'LIVE'
+    case 'isArchived': {
+      if (!props.endedTime) return 'LIVE'
+      const prevTime = props.endedTime.getTime()
+      const diff = new Date().getTime() - prevTime
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
 
-watch(() => props.time, calcDiff)
+      if (days >= 365) return `${Math.floor(days / 365)}年前`
+      if (days >= 31) return `${Math.floor(days / 30.42)}ヶ月前`
+      if (days >= 1) return `${days}日前`
+      return `${Math.floor(diff / (1000 * 60 * 60))}時間前`
+    }
+    default: {
+      const exhaustivenessCheck: never = status.value
+      throw new Error(`Unexpected Type : ${exhaustivenessCheck}`)
+    }
+  }
+})
 </script>
 
 <template>
-  <div :class="$style.background">
-    <p 
-      :class="$style.content"
-      :is-planned="days.value > 0"
-      :is-streaming="" 
-      :is-achieved=""
-    >{{ text }}</p>
+  <div :class="$style.background" :data-status="status">
+    <p :class="$style.content">{{ text }}</p>
   </div>
 </template>
 
 <style lang="scss" module>
-.background{
+.background {
   /* Status=Streaming */
   display: flex;
   flex-direction: row;
@@ -50,9 +61,17 @@ watch(() => props.time, calcDiff)
   left: 90px;
   top: 20px;
 
-  background: rgba(255, 0, 0, 0.7);
+  &[data-status='isPlanned'] {
+    background: #00b500;
+  }
+  &[data-status='isStreaming'] {
+    background: rgba(255, 0, 0, 0.7);
+  }
+  &[data-status='isArchived'] {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
-.content{
+.content {
   font-family: 'Arial';
   font-style: normal;
   font-weight: 700;
@@ -62,7 +81,7 @@ watch(() => props.time, calcDiff)
   align-items: center;
   text-align: center;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   /* オートレイアウト内部 */
 
