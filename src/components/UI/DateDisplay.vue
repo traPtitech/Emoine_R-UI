@@ -52,7 +52,6 @@ const text = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
 
   width: 64px;
   height: 32px;
