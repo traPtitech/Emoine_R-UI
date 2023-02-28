@@ -9,6 +9,7 @@ const props = defineProps<{
 }>()
 
 const status = computed((): LiveStatus => {
+  /* todo: endedTimeが存在しないときのサーバーからのデータの仕様に合わせる */
   if (new Date().getTime() < props.startedTime.getTime()) return 'isPlanned'
   if (isNaN(props.endedTime.getTime())) return 'isStreaming'
   return 'isArchived'
@@ -24,13 +25,12 @@ const text = computed(() => {
       return 'LIVE'
     case 'isArchived': {
       if (!props.endedTime) return 'LIVE'
-      const prevTime = props.endedTime.getTime()
-      const diff = new Date().getTime() - prevTime
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const diff = new Date().getTime() - props.endedTime.getTime()
+      const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24))
 
-      if (days >= 365) return `${Math.floor(days / 365)}年前`
-      if (days >= 31) return `${Math.floor(days / 30.42)}ヶ月前`
-      if (days >= 1) return `${days}日前`
+      if (diffDays >= 365) return `${Math.floor(diffDays / 365)}年前`
+      if (diffDays >= 31) return `${Math.floor(diffDays / 31)}ヶ月前`
+      if (diffDays >= 1) return `${diffDays}日前`
       return `${Math.floor(diff / (1000 * 60 * 60))}時間前`
     }
     default: {
@@ -49,18 +49,15 @@ const text = computed(() => {
 
 <style lang="scss" module>
 .background {
-  /* Status=Streaming */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0px;
 
-  width: 60px;
-  height: 30px;
-  left: 90px;
-  top: 20px;
+  width: 64px;
+  height: 32px;
 
+  /* todo: styles/common.scssにまとめる */
   &[data-status='isPlanned'] {
     background: #00b500;
   }
@@ -72,21 +69,12 @@ const text = computed(() => {
   }
 }
 .content {
-  font-family: 'Arial';
-  font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #ffffff;
-
-  /* オートレイアウト内部 */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 </style>
