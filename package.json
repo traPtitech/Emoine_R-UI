@@ -8,7 +8,7 @@
     "type-check": "tsc",
     "gen-api": "node ./scripts/gen-api.js",
     "postinstall": "npm run gen-api",
-    "start-mock": "prism mock -p 4010 -d https://raw.githubusercontent.com/traPtitech/Emoine_R/main/docs/openapi.yml"
+    "start-mock": "prism mock -p 8090 -d https://raw.githubusercontent.com/traPtitech/Emoine_R/main/docs/openapi.yml"
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.11",

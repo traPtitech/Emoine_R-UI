@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import VuePlugin from '@vitejs/plugin-vue'
 import path from 'path'
 
-const devHost = 'localhost:4010'
+const devHost = 'localhost:8090'
 const prodHost = process.env.HOST
 
 const srcPath = path.resolve(__dirname, 'src').replace(/\\/g, '/')
