@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { dayFormat } from '@/utils/DayFormat.vue'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
@@ -25,13 +26,7 @@ const text = computed(() => {
       return 'LIVE'
     case 'isArchived': {
       if (!props.endedTime) return 'LIVE'
-      const diff = new Date().getTime() - props.endedTime.getTime()
-      const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24))
-
-      if (diffDays >= 365) return `${Math.floor(diffDays / 365)}年前`
-      if (diffDays >= 31) return `${Math.floor(diffDays / 31)}ヶ月前`
-      if (diffDays >= 1) return `${diffDays}日前`
-      return `${Math.floor(diff / (1000 * 60 * 60))}時間前`
+      return dayFormat(props.endedTime)
     }
     default: {
       const exhaustivenessCheck: never = status.value
