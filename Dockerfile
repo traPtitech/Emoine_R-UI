@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+RUN npm run gen-api
 RUN npm run build
 
 FROM caddy:2.4.3-alpine
