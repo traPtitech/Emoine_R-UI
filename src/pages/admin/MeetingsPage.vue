@@ -79,8 +79,9 @@ onMounted(async () => {
   background-color: white;
 }
 .meetingListItem {
+  padding: 4px 0px;
   &:not(:last-child) {
-    margin-bottom: 4px;
+    border-bottom: 1px solid $background-secondary;
   }
 }
 .newEventButtonContainer {
@@ -88,7 +89,6 @@ onMounted(async () => {
   justify-content: center;
   padding: 4px 0px;
   margin: 0px 4px;
-  border-top: 1px solid $background-secondary;
 }
 .newEventLink {
   display: flex;
