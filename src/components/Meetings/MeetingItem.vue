@@ -16,15 +16,17 @@ defineProps<{
         <p :class="$style.title">{{ meeting.title }}</p>
         <a-icon
           name="tabler:certificate"
-          :zise="32"
+          :size="32"
           :class="$style.certificateIcon"
+          color="#ff007f"
         />
       </div>
       <div :class="$style.middleContainer">
         <p :class="$style.videoId">{{ meeting.video_id }}</p>
       </div>
       <div :class="$style.rightContainer">
-        <date-chip :date="meeting.started_at" />
+        <!-- datechipができたら設置 -->
+        <!-- <date-chip :date="meeting.started_at" /> -->
       </div>
     </div>
   </router-link>
@@ -38,7 +40,7 @@ defineProps<{
   display: flex;
   align-items: center;
   height: 60px;
-  padding: 8px 8px;
+  padding: 8px;
   &:hover {
     background-color: $background-secondary;
   }
@@ -46,9 +48,10 @@ defineProps<{
 .leftContainer {
   display: flex;
   align-items: center;
-  flex-grow: 2;
+  flex-grow: 1;
   border-right: 1px solid $color-secondary;
   height: 70%;
+  padding-right: 20px;
 }
 .thumbnail {
   width: 80px;
@@ -59,10 +62,9 @@ defineProps<{
   font-weight: bold;
   margin-left: 20px;
   color: $text-primary;
-  flex-grow: 2;
+  flex-grow: 1;
 }
 .certificateIcon {
-  margin-right: 20px;
 }
 .middleContainer {
   display: flex;

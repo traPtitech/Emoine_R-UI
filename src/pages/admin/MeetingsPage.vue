@@ -86,15 +86,17 @@ const meetings: Meeting[] = [
 .newEventButtonContainer {
   display: flex;
   justify-content: center;
-  padding: 4px 0;
+  padding: 4px 0px;
+  margin: 0px 4px;
+  border-top: 1px solid $background-secondary;
 }
 .newEventLink {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  width: 100%;
   padding: 4px 12px;
-  border-radius: 20px;
   font-weight: bold;
   color: $color-secondary;
   text-decoration: none;
