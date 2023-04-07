@@ -37,8 +37,8 @@ defineProps<{
   gap: 4px;
 }
 .tab {
-  width: 160px;
-  height: 36px;
+  width: 10rem;
+  height: 2.25rem;
   background-color: white;
   border-radius: 0.75rem 0.75rem 0 0;
   color: $color-secondary;

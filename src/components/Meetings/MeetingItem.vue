@@ -39,7 +39,7 @@ defineProps<{
 .container {
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 3.75rem;
   padding: 8px;
   &:hover {
     background-color: $background-secondary;
@@ -54,8 +54,8 @@ defineProps<{
   padding-right: 20px;
 }
 .thumbnail {
-  width: 80px;
-  height: 45px;
+  width: 5rem;
+  height: 2.75rem;
 }
 .title {
   font-size: 1.25rem;
@@ -70,8 +70,8 @@ defineProps<{
   display: flex;
   align-items: center;
   border-right: 1px solid $color-secondary;
-  padding: 0 20px;
-  width: 140px;
+  padding: 0 1.25rem;
+  width: 8.75rem;
   height: 70%;
 }
 .videoId {
@@ -80,7 +80,7 @@ defineProps<{
 .rightContainer {
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   width: 120px;
   height: 70%;
 }

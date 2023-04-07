@@ -68,7 +68,7 @@ const meetings: Meeting[] = [
 
 <style lang="scss" module>
 .titleContainer {
-  padding: 50px 0;
+  padding: 3.125rem 0;
   text-align: center;
 }
 .tabs {
