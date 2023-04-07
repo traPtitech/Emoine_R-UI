@@ -1,11 +1,18 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { toPage } from '@/lib/parseQueryParams'
-import { Meeting } from '@/lib/apis'
 import AdminTabs from '@/components/UI/AdminTabs.vue'
 import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
+import PaginationBar from '@/components/UI/PaginationBar.vue'
+import apis, { Meeting } from '@/lib/apis'
+
+//todo: 型定義がない
+interface AllMeetings {
+  meetings: Meeting[]
+  total_meetings: number
+}
 
 const route = useRoute()
 const page = ref(toPage(route.query.page))
@@ -17,29 +24,16 @@ watch(
   }
 )
 
-const totalMeetingsCount = ref(2)
-const meetings: Meeting[] = [
-  {
-    id: 'id',
-    video_id: 'video_id111',
-    title: 'title',
-    thumbnail:
-      'https://connpass-tokyo.s3.amazonaws.com/thumbs/b0/fc/b0fcaa37725965741cada4eaf9b730af.png',
-    started_at: '2023-01-22',
-    ended_at: '2023-01-22',
-    description: 'description'
-  },
-  {
-    id: 'id2',
-    video_id: 'video_id222',
-    title: 'title2',
-    thumbnail:
-      'https://connpass-tokyo.s3.amazonaws.com/thumbs/b0/fc/b0fcaa37725965741cada4eaf9b730af.png',
-    started_at: '2023-01-23',
-    ended_at: '2023-01-23',
-    description: 'description2'
-  }
-]
+const meetings = ref<Meeting[]>([])
+const totalMeetingsCount = ref()
+const constructLink = (page: number) => `?page=${page}`
+
+onMounted(async () => {
+  //todo: エラーハンドリング
+  const res = (await apis.getAllMeeting(10, page.value)).data as AllMeetings // todo: api定義に型がついていない
+  meetings.value = res.meetings
+  totalMeetingsCount.value = res.total_meetings
+})
 </script>
 
 <template>
@@ -63,7 +57,13 @@ const meetings: Meeting[] = [
       </li>
     </ul>
   </admin-tabs>
-  <pagination-bar :current-page="page" :total-pages="totalMeetingsCount" />
+  <div :class="$style.paginationBarContainer">
+    <pagination-bar
+      :current-page="page"
+      :total-page="Math.ceil(totalMeetingsCount / 10)"
+      :construct-link="constructLink"
+    />
+  </div>
 </template>
 
 <style lang="scss" module>
@@ -104,5 +104,9 @@ const meetings: Meeting[] = [
     color: $color-primary;
     background-color: $background-secondary;
   }
+}
+.paginationBarContainer {
+  display: flex;
+  justify-content: center;
 }
 </style>
