@@ -38,7 +38,7 @@ onMounted(async () => {
 
 <template>
   <div :class="$style.titleContainer">
-    <h1 :class="$style.title">Emoine Admin</h1>
+    <h1 :class="$style.title"><img src="/public/logo_admin.png" /></h1>
   </div>
   <admin-tabs current-tab="events" :class="$style.tabs">
     <ul :class="$style.meetingList">
