@@ -8,6 +8,6 @@
 .container {
   color: $text-primary;
   background-color: $background-primary;
-  height: 100vh;
+  min-height: 100vh;
 }
 </style>
