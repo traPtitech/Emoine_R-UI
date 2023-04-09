@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { dayFormat } from '@/utils/DayFormat.vue'
+import { getDateDiffText } from '@/utils/DateFormat.js'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
@@ -16,7 +16,7 @@ const status = computed((): LiveStatus => {
   return 'isArchived'
 })
 
-const text = computed(() => {
+const dateDiffText = computed(() => {
   switch (status.value) {
     case 'isPlanned':
       return `${
@@ -26,7 +26,7 @@ const text = computed(() => {
       return 'LIVE'
     case 'isArchived': {
       if (!props.endedTime) return 'LIVE'
-      return dayFormat(props.endedTime)
+      return getDateDiffText(props.endedTime)
     }
     default: {
       const exhaustivenessCheck: never = status.value
@@ -37,13 +37,13 @@ const text = computed(() => {
 </script>
 
 <template>
-  <div :class="$style.background" :data-status="status">
-    <p :class="$style.content">{{ text }}</p>
+  <div :class="$style.container" :data-status="status">
+    <p :class="$style.content">{{ dateDiffText }}</p>
   </div>
 </template>
 
 <style lang="scss" module>
-.background {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,6 @@
-<script lang="ts">
 import dayjs from 'dayjs'
 
-export function dayFormat(date: Date): string {
+export function getDateDiffText(date: Date): string {
   const pastDate = dayjs(date)
   const nowDate = dayjs()
   if (nowDate.diff(pastDate, 'year'))
@@ -12,4 +11,3 @@ export function dayFormat(date: Date): string {
     return `${nowDate.diff(pastDate, 'day')}日前`
   return `${nowDate.diff(pastDate, 'hour')}時間前`
 }
-</script>
