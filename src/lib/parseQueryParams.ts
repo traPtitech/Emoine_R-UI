@@ -1,6 +1,8 @@
 import type { LocationQueryValue } from 'vue-router'
 
-export const toPage = (v: LocationQueryValue | LocationQueryValue[]) => {
+export const getCurrentPage = (
+  v: LocationQueryValue | LocationQueryValue[]
+) => {
   if (Array.isArray(v)) {
     v = v[0]
   }

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { toPage } from '@/lib/parseQueryParams'
+import { getCurrentPage } from '@/lib/parseQueryParams'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import apis, { Meeting } from '@/lib/apis'
 import MeetingThumbnail from '@/components/MeetingThumbnail/MeetingThumbnail.vue'
+import EmoineHeader from '@/components/EmoineHeader.vue'
 
 //todo: 型定義がない
 interface AllMeetings {
@@ -12,11 +13,11 @@ interface AllMeetings {
   total_meetings: number
 }
 const route = useRoute()
-const page = ref(toPage(route.query.page))
+const page = ref(getCurrentPage(route.query.page))
 watch(
   () => route.query.page,
   newPage => {
-    page.value = toPage(newPage)
+    page.value = getCurrentPage(newPage)
   }
 )
 const meetings = ref<Meeting[]>([])
@@ -32,11 +33,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div :class="$style.titleContainer">
-    <h1 :class="$style.title">
-      <img src="public/logo.png" />
-    </h1>
-  </div>
+  <emoine-header />
   <div :class="$style.meetingListContainer">
     <ul :class="$style.meetingList">
       <li v-for="meeting in meetings" :key="meeting.id">
@@ -47,7 +44,7 @@ onMounted(async () => {
   <div :class="$style.paginationBarContainer">
     <pagination-bar
       :current-page="page"
-      :total-page="Math.ceil(totalMeetingsCount / 10)"
+      :total-page="Math.ceil(totalMeetingsCount / 12)"
       :construct-link="constructLink"
     />
   </div>
