@@ -9,12 +9,6 @@ import PaginationBar from '@/components/UI/PaginationBar.vue'
 import apis, { Meeting } from '@/lib/apis'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 
-//todo: 型定義がない
-interface AllMeetings {
-  meetings: Meeting[]
-  total_meetings: number
-}
-
 const route = useRoute()
 const page = ref(getCurrentPage(route.query.page))
 
@@ -31,9 +25,9 @@ const constructLink = (page: number) => `?page=${page}`
 
 onMounted(async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getAllMeeting(10, page.value)).data as AllMeetings // todo: api定義に型がついていない
+  const res = (await apis.getAllMeetings(10, page.value)).data
   meetings.value = res.meetings
-  totalMeetingsCount.value = res.total_meetings
+  totalMeetingsCount.value = res.total
 })
 </script>
 
