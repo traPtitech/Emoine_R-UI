@@ -38,7 +38,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <emoine-header is-admin-page />
+  <emoine-header />
   <admin-tabs current-tab="events" :class="$style.tabs">
     <ul :class="$style.meetingList">
       <li

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-interface Props {
-  isAdminPage?: boolean
-}
-const props = defineProps<Props>()
-const headerLogo = props.isAdminPage
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const headerLogo = route.path.startsWith('/admin')
   ? '/public/logo_admin.png'
   : '/public/logo.png'
 </script>
