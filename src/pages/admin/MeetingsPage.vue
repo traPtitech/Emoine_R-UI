@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { toPage } from '@/lib/parseQueryParams'
+import { getCurrentPage } from '@/lib/parseQueryParams'
 import AdminTabs from '@/components/UI/AdminTabs.vue'
 import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
@@ -16,12 +16,12 @@ interface AllMeetings {
 }
 
 const route = useRoute()
-const page = ref(toPage(route.query.page))
+const page = ref(getCurrentPage(route.query.page))
 
 watch(
   () => route.query.page,
   newPage => {
-    page.value = toPage(newPage)
+    page.value = getCurrentPage(newPage)
   }
 )
 
