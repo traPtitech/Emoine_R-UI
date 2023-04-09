@@ -7,6 +7,7 @@ import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import apis, { Meeting } from '@/lib/apis'
+import EmoineHeader from '@/components/EmoineHeader.vue'
 
 //todo: 型定義がない
 interface AllMeetings {
@@ -37,9 +38,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div :class="$style.titleContainer">
-    <h1 :class="$style.title"><img src="/public/logo_admin.png" /></h1>
-  </div>
+  <emoine-header is-admin-page />
   <admin-tabs current-tab="events" :class="$style.tabs">
     <ul :class="$style.meetingList">
       <li
@@ -67,10 +66,6 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" module>
-.titleContainer {
-  padding: 3.125rem 0;
-  text-align: center;
-}
 .tabs {
   margin: 0 20%;
 }
