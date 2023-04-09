@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 interface Props {
-  isAdminPage: boolean
+  isAdminPage?: boolean
 }
 const props = defineProps<Props>()
 const headerLogo = props.isAdminPage
