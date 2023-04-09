@@ -51,10 +51,6 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" module>
-.titleContainer {
-  padding: 3.125rem 0;
-  text-align: center;
-}
 .meetingListContainer {
   width: fit-content;
   margin: 0 auto;
