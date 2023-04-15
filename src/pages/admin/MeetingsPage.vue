@@ -14,8 +14,9 @@ const page = ref(getCurrentPage(route.query.page))
 
 watch(
   () => route.query.page,
-  newPage => {
+  async newPage => {
     page.value = getCurrentPage(newPage)
+    await fetchMeetings()
   }
 )
 
@@ -23,12 +24,14 @@ const meetings = ref<Meeting[]>([])
 const totalMeetingsCount = ref()
 const constructLink = (page: number) => `?page=${page}`
 
-onMounted(async () => {
+const fetchMeetings = async () => {
   //todo: エラーハンドリング
   const res = (await apis.getAllMeetings(10, page.value)).data
   meetings.value = res.meetings
   totalMeetingsCount.value = res.total
-})
+}
+
+onMounted(fetchMeetings)
 </script>
 
 <template>
