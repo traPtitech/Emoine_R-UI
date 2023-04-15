@@ -3,14 +3,16 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const headerLogo = route.path.startsWith('/admin')
-  ? '/public/logo_admin.png'
-  : '/public/logo.png'
+  ? '/logo_admin.png'
+  : '/logo.png'
 </script>
 
 <template>
   <div :class="$style.titleContainer">
     <h1 :class="$style.title">
-      <img :src="headerLogo" />
+      <router-link to="/">
+        <img :src="headerLogo" />
+      </router-link>
     </h1>
   </div>
 </template>
