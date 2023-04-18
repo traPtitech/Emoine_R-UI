@@ -29,7 +29,7 @@ defineProps<{ meeting: Meeting }>()
 }
 
 .textContainer {
-  height: 8rem;
+  max-height: 8rem;
   padding: 0.5rem 0.625rem;
   display: flex;
   flex-direction: column;
