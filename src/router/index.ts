@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
     path: '/admin/meetings',
     name: 'AdminMeetings',
     component: () => import('@/pages/admin/MeetingsPage.vue')
+  },
+  {
+    path: '/:path(.*)',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue')
   }
 ]
 
