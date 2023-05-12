@@ -7,4 +7,4 @@ export const textColors = [
   '#FFFFFF'
 ] as const
 
-export type TextColor = typeof textColors[number]
+export type TextColor = (typeof textColors)[number]
