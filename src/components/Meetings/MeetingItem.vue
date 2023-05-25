@@ -2,6 +2,7 @@
 import { Meeting } from '@/lib/apis'
 import { RouterLink } from 'vue-router'
 import AIcon from '@/components/UI/AIcon.vue'
+import DateChip from '@/components/UI/DateChip.vue'
 
 defineProps<{
   meeting: Meeting
@@ -11,7 +12,12 @@ defineProps<{
 <template>
   <router-link :to="`/admin/meetings/${meeting.id}`" :class="$style.link">
     <div :class="$style.container">
-      <img :src="meeting.thumbnail" :class="$style.thumbnail" />
+      <img
+        :height="44"
+        :width="80"
+        :src="meeting.thumbnail"
+        :class="$style.thumbnail"
+      />
       <div :class="$style.leftContainer">
         <p :class="$style.title">{{ meeting.title }}</p>
         <a-icon name="tabler:certificate" :size="32" color="#ff007f" />
@@ -20,8 +26,10 @@ defineProps<{
         <p :class="$style.videoId">{{ meeting.video_id }}</p>
       </div>
       <div :class="$style.rightContainer">
-        <!-- datechipができたら設置 -->
-        <!-- <date-chip :date="meeting.started_at" /> -->
+        <date-chip
+          :started-time="new Date(meeting.started_at)"
+          :ended-time="new Date(meeting.ended_at)"
+        />
       </div>
     </div>
   </router-link>
@@ -51,6 +59,7 @@ defineProps<{
 .thumbnail {
   width: 5rem;
   height: 2.75rem;
+  object-fit: cover;
 }
 .title {
   font-size: 1.25rem;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Meeting } from '@/lib/apis'
+import DateChip from '@/components/UI/DateChip.vue'
 
 defineProps<{ meeting: Meeting }>()
 </script>
@@ -9,8 +10,18 @@ defineProps<{ meeting: Meeting }>()
     :to="{ name: 'Meeting', params: { id: meeting.id } }"
     :class="$style.container"
   >
-    <!-- TODO: 日付コンポーネントを表示する -->
-    <img :src="meeting.thumbnail" :alt="`${meeting.title}のサムネイル画像`" />
+    <date-chip
+      :class="$style.dateChip"
+      :started-time="new Date(meeting.started_at)"
+      :ended-time="new Date(meeting.ended_at)"
+    />
+    <img
+      :width="266"
+      :height="150"
+      :src="meeting.thumbnail"
+      :alt="`${meeting.title}のサムネイル画像`"
+      :class="$style.thumbnail"
+    />
     <div :class="$style.textContainer">
       <p :class="$style.title">{{ meeting.title }}</p>
       <p :class="$style.description">{{ meeting.description }}</p>
@@ -26,8 +37,16 @@ defineProps<{ meeting: Meeting }>()
   background-color: white;
   color: black;
   text-decoration: none;
+  position: relative;
 }
-
+.dateChip {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+.thumbnail {
+  object-fit: cover;
+}
 .textContainer {
   max-height: 8rem;
   padding: 0.5rem 0.625rem;
