@@ -20,7 +20,7 @@
     "ress": "^5.0.2",
     "throttle-debounce": "^5.0.0",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.2.1"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.6.0",
