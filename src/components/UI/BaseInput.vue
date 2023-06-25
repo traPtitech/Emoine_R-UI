@@ -33,5 +33,10 @@ const value = computed({
   border-radius: 0.25rem;
   height: 2.5rem;
   font-size: 0.875rem;
+  border: 1px solid $color-secondary;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
 }
 </style>

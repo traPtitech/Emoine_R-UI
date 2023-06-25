@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { getDateDiffText } from '@/utils/dateFormat'
+import { getDateDiffText } from '@/utils/date'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
@@ -72,3 +72,4 @@ const dateDiffText = computed(() => {
   color: #ffffff;
 }
 </style>
+@/utils/date
