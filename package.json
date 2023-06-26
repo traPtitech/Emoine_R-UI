@@ -14,7 +14,7 @@
     "@iconify/vue": "^4.1.1",
     "@stoplight/prism-cli": "^5.0.1",
     "axios": "^1.4.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "pinia": "^2.1.4",
     "reconnecting-websocket": "^4.4.0",
     "ress": "^5.0.2",
