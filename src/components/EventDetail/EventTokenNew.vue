@@ -7,6 +7,7 @@ import { ref } from 'vue'
 import apis from '@/lib/apis'
 import { useRoute } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
+import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -35,7 +36,7 @@ const handleAddToken = async () => {
 
 <template>
   <div :class="$style.container">
-    <a-icon name="tabler:certificate" :size="32" color="#ff007f" />
+    <emoine-icon />
     <div :class="$style.formContainer">
       <base-input v-model="userName" placeholder="ユーザー名を入力" />
       <base-input v-model="description" placeholder="説明文を入力" />

@@ -2,6 +2,7 @@
 import { Token } from '@/lib/apis'
 import { formatDate } from '@/utils/date'
 import AIcon from '@/components/UI/AIcon.vue'
+import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 
 defineProps<{
   token: Token
@@ -10,7 +11,7 @@ defineProps<{
 
 <template>
   <div :class="$style.container">
-    <a-icon name="tabler:certificate" :size="32" color="#ff007f" />
+    <emoine-icon />
     <div :class="$style.leftContainer">
       <p :class="$style.userId">{{ token.user_id }}</p>
       <p :class="$style.description">{{ token.description }}</p>
@@ -22,7 +23,7 @@ defineProps<{
     </div>
     <div :class="$style.rightContainer">
       <button :class="$style.dotsButton">
-        <a-icon name="solar:menu-dots-bold" :size="32" />
+        <a-icon name="ph:dots-three-light" :size="32" />
       </button>
     </div>
   </div>
