@@ -38,5 +38,8 @@ const value = computed({
   &::placeholder {
     color: $text-secondary;
   }
+  &:focus {
+    border-color: black;
+  }
 }
 </style>

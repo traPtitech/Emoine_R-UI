@@ -39,7 +39,11 @@ const handleAddToken = async () => {
     <emoine-icon />
     <div :class="$style.formContainer">
       <base-input v-model="userName" placeholder="ユーザー名を入力" />
-      <base-input v-model="description" placeholder="説明文を入力" />
+      <base-input
+        v-model="description"
+        placeholder="説明文を入力"
+        :class="$style.description"
+      />
       <base-date-input v-model="expireDate" />
     </div>
     <div :class="$style.buttonContainer">
@@ -55,6 +59,7 @@ const handleAddToken = async () => {
 .container {
   display: flex;
   align-items: center;
+  width: 100%;
   height: 3.75rem;
   padding: 8px;
 }
@@ -67,6 +72,9 @@ const handleAddToken = async () => {
   height: 70%;
   padding-right: 20px;
   margin-left: 1.25rem;
+}
+.description {
+  flex-grow: 1;
 }
 .buttonContainer {
   display: flex;

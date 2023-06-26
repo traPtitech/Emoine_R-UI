@@ -16,7 +16,7 @@ const toggleNewToken = () => {
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div>
     <h2 :class="$style.heading">
       <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
       <p>Tokens</p>
@@ -45,8 +45,6 @@ const toggleNewToken = () => {
 </template>
 
 <style lang="scss" module>
-.container {
-}
 .tokenList {
   list-style: none;
   background-color: white;
@@ -67,7 +65,6 @@ const toggleNewToken = () => {
   display: flex;
   justify-content: center;
   padding: 4px 0px;
-  margin: 0px 4px;
 }
 .newTokenButton {
   display: flex;
