@@ -26,7 +26,12 @@ const props = withDefaults(
 
   &[data-type='primary'] {
     color: white;
-    background-color: $color-primary;
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.1) 100%
+      ),
+      #ff007f;
   }
   &[data-type='secondary'] {
     color: $color-secondary;
