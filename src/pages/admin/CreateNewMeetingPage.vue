@@ -1,11 +1,41 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import apis, { CreateMeeting, Meeting } from '@/lib/apis'
+import BaseInput from '@/components/UI/BaseInput.vue'
+import BaseButton from '@/components/UI/BaseButton.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
+import router from '@/router'
 
 //todo: 専用ヘッダー画像のアップロード
 const headerLogo = '/logo.png'
 
 const liveUrl = ref('')
+const isUrlValidated = ref(true)
+
+function getLiveIdFromUrl(): string {
+  const params = new URL(liveUrl.value).searchParams
+  if (params.has('v')) return
+  return params.get('v')
+}
+
+const createMeeting = async () => {
+  let id = ''
+  try {
+    const meetingInfo: CreateMeeting = {
+      video_id: getLiveIdFromUrl(),
+      description: ''
+    }
+    const res = (await apis.createMeeting(meetingInfo)).data
+    id = res.id
+  } catch (e: unknown) {
+    console.log(e)
+    isUrlValidated.value = false
+    return
+  }
+
+  // TODO: 遷移先の名前決定したらここに書く
+  router.push({ name: 'hoge', params: { id: id } })
+}
 </script>
 
 <template>
@@ -15,14 +45,17 @@ const liveUrl = ref('')
       <img :src="headerLogo" />
     </h2>
     <div :class="$style.cotainer">
-      <h3 :class="$style.subTitleText">LIVE URL</h3>
+      <div :class="$style.subTitleContainer">
+        <h3 :class="$style.subTitleText">LIVE URL</h3>
+        <div v-if="!isUrlValidated" :class="$style.errorText">
+          ※ 存在しないURLです
+        </div>
+      </div>
       <div :class="$style.newEventInputCotainer">
         <div :class="$style.input">
-          <input v-model="liveUrl" placeholder="Input URL..." />
+          <base-input placeholder="Input URL..." />
         </div>
-        <div :class="$style.button">
-          <button @click="toggle">toggle</button>
-        </div>
+        <base-button @click="createMeeting">追加</base-button>
       </div>
     </div>
   </div>
@@ -53,35 +86,30 @@ const liveUrl = ref('')
   gap: 14px;
   align-self: stretch;
 }
+.subTitleContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+}
 .subTitleText {
   color: #141414;
   font-size: 24px;
   font-family: Arial;
   font-weight: 700;
 }
+.errorText {
+  color: #ff007f;
+  font-size: 24px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 .newEventInputCotainer {
   display: flex;
   align-items: center;
   gap: 10px;
   align-self: stretch;
-}
-.input {
-  display: flex;
-  padding: 6px 0px 6px 10px;
-  align-items: center;
-  flex: 1 0 0;
-  border-radius: 6px;
-  border: 1px solid #d9d9d9;
-}
-.button {
-  display: flex;
-  height: 36px;
-  padding: 6px 16px;
-  align-items: center;
-  border-radius: 6px;
-  background: #ff007f;
-  color: white;
-  font-size: 16px;
-  font-family: Arial;
 }
 </style>
