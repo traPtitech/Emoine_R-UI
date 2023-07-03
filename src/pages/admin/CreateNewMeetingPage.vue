@@ -37,8 +37,7 @@ const createMeeting = async () => {
     }
   }
 
-  // TODO: 遷移先の名前決定したらここに書く
-  router.push({ name: 'hoge', params: { id: id } })
+  router.push({ path: `admin/events/${id}` })
 }
 </script>
 
@@ -95,7 +94,7 @@ const createMeeting = async () => {
 }
 .subTitleContainer {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.25rem;
   align-self: stretch;
 }
@@ -103,7 +102,9 @@ const createMeeting = async () => {
   color: #141414;
   font-size: 1.25rem;
   font-family: Arial;
+  font-style: normal;
   font-weight: 700;
+  line-height: normal;
 }
 .errorText {
   color: #ff007f;
