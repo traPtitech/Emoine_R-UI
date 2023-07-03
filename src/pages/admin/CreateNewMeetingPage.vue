@@ -4,7 +4,9 @@ import apis, { CreateMeetingRequest } from '@/lib/apis'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
-import router from '@/router'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 //todo: 専用ヘッダー画像のアップロード
 const headerLogo = '/logo.png'
@@ -14,15 +16,15 @@ const isValidURL = ref(true)
 
 const getLiveIdFromUrl = (liveUrl: string) => {
   const params = new URL(liveUrl).searchParams
-  if (!params.get('v')) throw new Error('Invalid URL')
-  return params.get('v')
+  const videoId = params.get('v')
+  if (!videoId) throw new Error('Invalid URL')
+  return videoId
 }
 
 const createMeeting = async () => {
   let id = ''
   try {
     const videoId = getLiveIdFromUrl(liveUrl.value)
-    if (!videoId) throw new Error('Invalid URL')
     const meetingInfo: CreateMeetingRequest = {
       video_id: videoId,
       description: ''
@@ -37,7 +39,7 @@ const createMeeting = async () => {
     }
   }
 
-  router.push({ path: `admin/events/${id}` })
+  router.push({ name: 'admin/events/:eventId', params: { id: id } })
 }
 </script>
 
@@ -58,7 +60,8 @@ const createMeeting = async () => {
         <div :class="$style.input">
           <base-input
             :model-value="liveUrl"
-            placeholder="YoutubeのライブURLを入力..."
+            placeholder="YouTubeのライブURLを入力..."
+            @update:model-value="liveUrl = $event"
           />
         </div>
         <base-button @click="createMeeting">追加</base-button>
@@ -101,7 +104,6 @@ const createMeeting = async () => {
 .subTitleText {
   color: #141414;
   font-size: 1.25rem;
-  font-family: Arial;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -109,10 +111,6 @@ const createMeeting = async () => {
 .errorText {
   color: #ff007f;
   font-size: 1.25rem;
-  font-family: Arial;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 .newEventInputCotainer {
   display: flex;
