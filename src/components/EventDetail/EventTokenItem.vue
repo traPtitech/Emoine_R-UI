@@ -3,10 +3,48 @@ import { Token } from '@/lib/apis'
 import { formatDate } from '@/utils/date'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
+import { MenuItem } from '@/components/EventDetail/MenuModal.vue'
+import MenuModal from '@/components/EventDetail/MenuModal.vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 defineProps<{
   token: Token
 }>()
+
+const menuItems: MenuItem[] = [
+  {
+    key: 'delete',
+    label: 'Delete',
+    icon: 'ph:trash',
+    onClick: async () => {
+      try {
+        console.log('delete')
+      } catch {
+        console.error('error')
+      }
+    }
+  }
+]
+
+const isMenuModalOpen = ref(false)
+const toggleMenuModal = () => {
+  isMenuModalOpen.value = !isMenuModalOpen.value
+}
+
+const itemButtonRef = ref<HTMLButtonElement | undefined>()
+const handleClick = (e: MouseEvent) => {
+  if (!itemButtonRef.value) return
+  if (!itemButtonRef.value.contains(e.target as Node)) {
+    isMenuModalOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClick)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', handleClick)
+})
 </script>
 
 <template>
@@ -22,10 +60,15 @@ defineProps<{
       </p>
     </div>
     <div :class="$style.rightContainer">
-      <button :class="$style.dotsButton">
+      <button
+        ref="itemButtonRef"
+        :class="$style.dotsButton"
+        @click="toggleMenuModal"
+      >
         <a-icon name="ph:dots-three-light" :size="32" />
       </button>
     </div>
+    <menu-modal v-if="isMenuModalOpen" :menu-items="menuItems" />
   </div>
 </template>
 
@@ -35,6 +78,7 @@ defineProps<{
   align-items: center;
   height: 3.75rem;
   padding: 8px;
+  position: relative;
 }
 .leftContainer {
   display: flex;
@@ -70,7 +114,7 @@ defineProps<{
   display: flex;
   align-items: center;
   padding: 0 1.25rem;
-  width: 120px;
+  width: 5rem;
   height: 70%;
 }
 .dotsButton {
