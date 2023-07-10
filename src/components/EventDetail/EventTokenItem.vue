@@ -3,9 +3,9 @@ import { Token } from '@/lib/apis'
 import { formatDate } from '@/utils/date'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
-import { MenuItem } from '@/components/EventDetail/MenuModal.vue'
-import MenuModal from '@/components/EventDetail/MenuModal.vue'
-import { onMounted, onUnmounted, ref } from 'vue'
+import MenuModal from '@/components/UI/MenuModal.vue'
+import { MenuItem } from '@/components/UI/MenuModal.vue'
+import { useMenuModal } from '@/composables/useMenuModal'
 
 defineProps<{
   token: Token
@@ -26,25 +26,7 @@ const menuItems: MenuItem[] = [
   }
 ]
 
-const isMenuModalOpen = ref(false)
-const toggleMenuModal = () => {
-  isMenuModalOpen.value = !isMenuModalOpen.value
-}
-
-const itemButtonRef = ref<HTMLButtonElement | undefined>()
-const handleClick = (e: MouseEvent) => {
-  if (!itemButtonRef.value) return
-  if (!itemButtonRef.value.contains(e.target as Node)) {
-    isMenuModalOpen.value = false
-  }
-}
-
-onMounted(() => {
-  document.addEventListener('click', handleClick)
-})
-onUnmounted(() => {
-  document.removeEventListener('click', handleClick)
-})
+const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
 </script>
 
 <template>

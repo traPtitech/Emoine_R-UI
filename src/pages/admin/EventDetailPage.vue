@@ -17,7 +17,11 @@ onMounted(fetchMeetings)
 </script>
 
 <template>
-  <event-tokens v-if="!!tokens" :tokens="tokens" />
+  <event-tokens v-if="!!tokens" :tokens="tokens" :class="$style.aaa" />
 </template>
 
-<style lang="scss" module></style>
+<style lang="scss" module>
+.aaa {
+  width: 1140px;
+}
+</style>
