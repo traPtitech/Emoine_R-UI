@@ -18,12 +18,6 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/admin/MeetingsPage.vue')
   },
   {
-    path: '/admin/meetings/:id',
-    name: 'AdminMeetingDetail',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    component: () => import('@/pages/admin/EventDetailPage.vue') // TODO: ページ作成したらここに書く
-  },
-  {
     path: '/:path(.*)',
     name: 'NotFound',
     component: () => import('@/pages/NotFound.vue')
