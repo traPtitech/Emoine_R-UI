@@ -12,8 +12,8 @@ defineProps<{ meeting: Meeting }>()
   >
     <date-chip
       :class="$style.dateChip"
-      :started-time="new Date(meeting.started_at)"
-      :ended-time="new Date(meeting.ended_at)"
+      :started-time="new Date(meeting.startedAt)"
+      :ended-time="new Date(meeting.endedAt)"
     />
     <img
       :width="266"

@@ -23,12 +23,12 @@ defineProps<{
         <a-icon name="tabler:certificate" :size="32" color="#ff007f" />
       </div>
       <div :class="$style.middleContainer">
-        <p :class="$style.videoId">{{ meeting.video_id }}</p>
+        <p :class="$style.videoId">{{ meeting.videoId }}</p>
       </div>
       <div :class="$style.rightContainer">
         <date-chip
-          :started-time="new Date(meeting.started_at)"
-          :ended-time="new Date(meeting.ended_at)"
+          :started-time="new Date(meeting.startedAt)"
+          :ended-time="new Date(meeting.endedAt)"
         />
       </div>
     </div>
