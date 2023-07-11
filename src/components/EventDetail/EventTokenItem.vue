@@ -33,12 +33,12 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
   <div :class="$style.container">
     <emoine-icon />
     <div :class="$style.leftContainer">
-      <p :class="$style.userId">{{ token.user_id }}</p>
+      <p :class="$style.userId">{{ token.username }}</p>
       <p :class="$style.description">{{ token.description }}</p>
     </div>
     <div :class="$style.middleContainer">
       <p :class="$style.expireDate">
-        {{ formatDate(new Date(token.expire_at)) }}
+        {{ formatDate(new Date(token.expireAt)) }}
       </p>
     </div>
     <div :class="$style.rightContainer">

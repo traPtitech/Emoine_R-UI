@@ -21,5 +21,5 @@ export const useMenuModal = () => {
     document.removeEventListener('click', handleClick)
   })
 
-  return [isMenuModalOpen, toggleMenuModal, itemButtonRef]
+  return [isMenuModalOpen, toggleMenuModal, itemButtonRef] as const
 }

@@ -23,9 +23,9 @@ const expireDate = ref('')
 const handleAddToken = async () => {
   // todo: error handling
   await apis.createToken({
-    user_id: userName.value, //fixme: 外部の人もあり得るので、usernameの方が適切そう
-    meeting_id: meetingId,
-    expire_at: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
+    username: userName.value,
+    meetingId: meetingId,
+    expireAt: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
     description: description.value
   })
   userName.value = ''
