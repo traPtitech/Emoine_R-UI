@@ -5,9 +5,9 @@ const props = defineProps<{
   comment: Comment
 }>()
 
-const shownName = props.comment.is_anonymous
+const shownName = props.comment.isAnonymous
   ? '匿名ユーザー'
-  : props.comment.user_id
+  : props.comment.username
 </script>
 
 <template>
