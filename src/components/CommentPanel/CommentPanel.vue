@@ -31,7 +31,7 @@ const emit = defineEmits<{
   height: calc(100% - 160px);
 }
 .commentPanel {
-  width: 340px;
+  width: 30rem;
   height: 100vh;
   border-left: 1px solid $color-secondary;
 }

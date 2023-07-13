@@ -15,6 +15,10 @@ const toggleIsAnonymous = () => {
 }
 const sendComment = () => {
   //todo:コメントを送信する
+  console.log(commentValue.value)
+  console.log(pickedColor.value)
+  console.log(isAnonymous.value)
+  commentValue.value = ''
 }
 </script>
 
