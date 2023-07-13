@@ -3,10 +3,9 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getEventId } from '@/lib/parsePathParams'
 import CommentPanel from '@/components/CommentPanel/CommentPanel.vue'
-import StampList from '@/components/StampList/StampList.vue'
-import { Stamp } from '@/components/StampList/StampList.vue'
 import { useGeneralConnectClient } from '@/lib/connectClient'
 import { Event, Comment } from '@/lib/apis'
+import StampList, { Stamp } from '@/components/StampList/StampList.vue'
 
 const route = useRoute()
 const client = useGeneralConnectClient()
@@ -78,6 +77,7 @@ onMounted(() => {
 .leftContainer {
   width: 100%;
   padding: 1rem 0;
+  margin: 1rem 4rem;
 }
 .video {
   width: 100%; // TODO: でかすぎ
