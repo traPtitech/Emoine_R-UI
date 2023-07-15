@@ -26,7 +26,7 @@ const createMeeting = async () => {
   try {
     const videoId = getLiveIdFromUrl(liveUrl.value)
     const meetingInfo: CreateMeetingRequest = {
-      video_id: videoId,
+      videoId: videoId,
       description: ''
     }
     const res = (await apis.createMeeting(meetingInfo)).data
@@ -39,7 +39,7 @@ const createMeeting = async () => {
     }
   }
 
-  router.push({ name: 'admin/events/:eventId', params: { id: id } })
+  router.push({ name: 'admin/events/:eventId', params: { eventId: id } })
 }
 </script>
 
