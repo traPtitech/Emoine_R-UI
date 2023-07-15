@@ -59,9 +59,8 @@ const createMeeting = async () => {
       <div :class="$style.newEventInputCotainer">
         <div :class="$style.input">
           <base-input
-            :model-value="liveUrl"
+            v-model="liveUrl"
             placeholder="YouTubeのライブURLを入力..."
-            @update:model-value="liveUrl = $event"
           />
         </div>
         <base-button @click="createMeeting">追加</base-button>
@@ -104,9 +103,7 @@ const createMeeting = async () => {
 .subTitleText {
   color: #141414;
   font-size: 1.25rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 .errorText {
   color: #ff007f;
