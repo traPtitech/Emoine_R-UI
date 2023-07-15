@@ -72,4 +72,3 @@ const dateDiffText = computed(() => {
   color: #ffffff;
 }
 </style>
-@/utils/date

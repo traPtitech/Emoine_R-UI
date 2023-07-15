@@ -18,6 +18,7 @@ const menuItems: MenuItem[] = [
     icon: 'ph:trash',
     onClick: async () => {
       try {
+        //todo: deleteのAPIが生えてない
         console.log('delete')
       } catch {
         console.error('error')
@@ -32,16 +33,16 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
 <template>
   <div :class="$style.container">
     <emoine-icon />
-    <div :class="$style.leftContainer">
+    <div :class="[$style.containerBase, $style.leftContainer]">
       <p :class="$style.userId">{{ token.username }}</p>
       <p :class="$style.description">{{ token.description }}</p>
     </div>
-    <div :class="$style.middleContainer">
+    <div :class="[$style.containerBase, $style.middleContainer]">
       <p :class="$style.expireDate">
         {{ formatDate(new Date(token.expireAt)) }}
       </p>
     </div>
-    <div :class="$style.rightContainer">
+    <div :class="[$style.containerBase, $style.rightContainer]">
       <button
         ref="itemButtonRef"
         :class="$style.dotsButton"
@@ -62,12 +63,14 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
   padding: 8px;
   position: relative;
 }
-.leftContainer {
+.containerBase {
   display: flex;
   align-items: center;
+  height: 70%;
+}
+.leftContainer {
   flex-grow: 1;
   border-right: 1px solid $color-secondary;
-  height: 70%;
   padding-right: 20px;
 }
 .userId {
@@ -82,22 +85,16 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
   color: $text-secondary;
 }
 .middleContainer {
-  display: flex;
-  align-items: center;
   border-right: 1px solid $color-secondary;
   padding: 0 1.25rem;
   width: 8.75rem;
-  height: 70%;
 }
 .expireDate {
   color: $color-secondary;
 }
 .rightContainer {
-  display: flex;
-  align-items: center;
   padding: 0 1.25rem;
   width: 5rem;
-  height: 70%;
 }
 .dotsButton {
   border-radius: 50%;
