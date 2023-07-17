@@ -39,7 +39,7 @@ const createMeeting = async () => {
     }
   }
 
-  router.push({ name: 'admin/events/:eventId', params: { eventId: id } })
+  router.push({ name: 'AdminEventDetail', params: { eventId: id } })
 }
 </script>
 
