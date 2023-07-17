@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type ButtonType = 'primary'
+type ButtonType = 'primary' | 'secondary'
 const props = withDefaults(
   defineProps<{
     type?: ButtonType
@@ -17,12 +17,27 @@ const props = withDefaults(
 
 <style lang="scss" module>
 .button {
-  color: white;
-  background-color: $color-primary;
+  display: flex;
+  align-items: center;
   border-radius: 0.25rem;
   padding: 0.5rem;
   height: 1.875rem;
   font-size: 0.75rem;
+
+  &[data-type='primary'] {
+    color: white;
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.1) 100%
+      ),
+      #ff007f;
+  }
+  &[data-type='secondary'] {
+    color: $color-secondary;
+    background-color: white;
+    border: 1px solid $color-secondary;
+  }
 
   &:hover {
     opacity: 0.7;
