@@ -23,7 +23,7 @@ const fetchTokens = async () => {
   const res = (await apis.getMeetingTokens(eventId)).data
   tokens.value = res
 }
-const updatedescription = async (description: string) => {
+const updateDescription = async (description: string) => {
   if (!eventInformation.value) return
   const updateMeetingRequest: CreateMeetingRequest = {
     videoId: eventInformation.value.videoId,
@@ -55,7 +55,7 @@ onMounted(async () => {
       <event-information
         v-if="eventInformation"
         :meeting="eventInformation"
-        @update-description="updatedescription($event)"
+        @update-description="updateDescription($event)"
         @delete="deleteEvent"
       />
     </section>
