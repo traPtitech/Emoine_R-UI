@@ -18,7 +18,7 @@ defineProps<{
     <ul :class="$style.menuItemList">
       <li v-for="item in menuItems" :key="item.key" :class="$style.menuItem">
         <button :class="$style.itemButton" @click="item.onClick">
-          <a-icon :name="item.icon" :size="24" />
+          <a-icon :name="item.icon" :size="20" :class="$style.buttonIcon" />
           {{ item.label }}
         </button>
       </li>
@@ -30,20 +30,23 @@ defineProps<{
 .container {
   background-color: white;
   position: absolute;
-  bottom: -1rem;
-  right: 3rem;
+  right: 0;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
 }
 .menuItemList {
   list-style: none;
 }
 .itemButton {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.5rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   &:hover {
     background-color: $background-secondary;
   }
+}
+.buttonIcon {
+  color: $text-secondary;
 }
 </style>
