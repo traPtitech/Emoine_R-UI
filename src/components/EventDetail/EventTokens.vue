@@ -17,10 +17,6 @@ const toggleNewToken = () => {
 
 <template>
   <div>
-    <h2 :class="$style.heading">
-      <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
-      <p>Tokens</p>
-    </h2>
     <ul :class="$style.tokenList">
       <li
         v-for="token in tokens"
@@ -48,11 +44,6 @@ const toggleNewToken = () => {
 .tokenList {
   list-style: none;
   background-color: white;
-}
-.heading {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 .tokenListItem {
   padding: 0.25rem 0;

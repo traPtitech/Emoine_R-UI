@@ -9,5 +9,6 @@
   color: $text-primary;
   background-color: $background-primary;
   min-height: 100vh;
+  padding-bottom: 2rem;
 }
 </style>
