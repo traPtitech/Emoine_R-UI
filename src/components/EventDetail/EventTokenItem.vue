@@ -43,15 +43,17 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
       </p>
     </div>
     <div :class="[$style.containerBase, $style.rightContainer]">
-      <button
-        ref="itemButtonRef"
-        :class="$style.dotsButton"
-        @click="toggleMenuModal"
-      >
-        <a-icon name="ph:dots-three-light" :size="32" />
-      </button>
+      <div :class="$style.menuModal">
+        <button
+          ref="itemButtonRef"
+          :class="$style.dotsButton"
+          @click="toggleMenuModal"
+        >
+          <a-icon name="ph:dots-three-light" :size="32" />
+        </button>
+        <menu-modal v-if="isMenuModalOpen" :menu-items="menuItems" />
+      </div>
     </div>
-    <menu-modal v-if="isMenuModalOpen" :menu-items="menuItems" />
   </div>
 </template>
 
@@ -95,6 +97,9 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
 .rightContainer {
   padding: 0 1.25rem;
   width: 5rem;
+}
+.menuModal {
+  position: relative;
 }
 .dotsButton {
   border-radius: 50%;
