@@ -8,6 +8,9 @@ import EventTokenNew from './EventTokenNew.vue'
 defineProps<{
   tokens: Token[]
 }>()
+const emit = defineEmits<{
+  (e: 'addNewToken', token: Token): void
+}>()
 
 const isNewTokenOpen = ref(false)
 const toggleNewToken = () => {
@@ -34,7 +37,11 @@ const toggleNewToken = () => {
           <a-icon name="mdi:plus-circle-outline" />
           新しいトークンを追加
         </button>
-        <event-token-new v-else @close="toggleNewToken" />
+        <event-token-new
+          v-else
+          @close="toggleNewToken"
+          @add-new-token="emit('addNewToken', $event)"
+        />
       </li>
     </ul>
   </div>

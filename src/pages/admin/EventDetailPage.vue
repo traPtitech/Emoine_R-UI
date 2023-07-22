@@ -12,21 +12,21 @@ const route = useRoute()
 const router = useRouter()
 const eventId = getMeetingId(route.params.eventId)
 
-const eventInformation = ref<Meeting>()
+const eventDetail = ref<Meeting>()
 const tokens = ref<Token[]>([])
 
 const fetchEventInformation = async () => {
   const res = (await apis.getMeeting(eventId)).data
-  eventInformation.value = res
+  eventDetail.value = res
 }
 const fetchTokens = async () => {
   const res = (await apis.getMeetingTokens(eventId)).data
   tokens.value = res
 }
 const updateDescription = async (description: string) => {
-  if (!eventInformation.value) return
+  if (!eventDetail.value) return
   const updateMeetingRequest: CreateMeetingRequest = {
-    videoId: eventInformation.value.videoId,
+    videoId: eventDetail.value.videoId,
     description: description
   }
   await apis.updateMeeting(eventId, updateMeetingRequest)
@@ -53,8 +53,8 @@ onMounted(async () => {
         <p>Event Information</p>
       </h2>
       <event-information
-        v-if="eventInformation"
-        :meeting="eventInformation"
+        v-if="eventDetail"
+        :meeting="eventDetail"
         @update-description="updateDescription($event)"
         @delete="deleteEvent"
       />
@@ -64,7 +64,7 @@ onMounted(async () => {
         <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
         <p>Tokens</p>
       </h2>
-      <event-tokens :tokens="tokens" />
+      <event-tokens :tokens="tokens" @add-new-token="tokens.unshift($event)" />
     </section>
   </div>
 </template>
@@ -78,6 +78,7 @@ onMounted(async () => {
   align-items: center;
   font-size: 2rem;
   gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .tokensSection {
   margin-top: 1rem;
