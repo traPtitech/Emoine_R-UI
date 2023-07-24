@@ -20,8 +20,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/admin/events/:eventId',
     name: 'AdminEventDetail',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    component: () => {} // TODO: ページ作成したらここに書く
+    component: () => import('@/pages/admin/EventDetailPage.vue')
   },
   {
     path: '/admin/meetings/new',

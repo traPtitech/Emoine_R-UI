@@ -10,7 +10,10 @@ defineProps<{
 </script>
 
 <template>
-  <router-link :to="`/admin/meetings/${meeting.id}`" :class="$style.link">
+  <router-link
+    :to="{ name: 'AdminEventDetail', params: { eventId: meeting.id } }"
+    :class="$style.link"
+  >
     <div :class="$style.container">
       <img
         :height="44"

@@ -4,17 +4,18 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseDateInput from '@/components/UI/BaseDateInput.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
-import apis from '@/lib/apis'
+import apis, { Token } from '@/lib/apis'
 import { useRoute } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 
 const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'addNewToken', token: Token): void
 }>()
 
 const route = useRoute()
-const meetingId = getMeetingId(route.params.id)
+const meetingId = getMeetingId(route.params.eventId)
 
 const userName = ref('')
 const description = ref('')
@@ -22,7 +23,7 @@ const expireDate = ref('')
 
 const handleAddToken = async () => {
   // todo: error handling
-  await apis.createToken({
+  const res = await apis.createToken({
     username: userName.value,
     meetingId: meetingId,
     expireAt: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
@@ -31,6 +32,7 @@ const handleAddToken = async () => {
   userName.value = ''
   description.value = ''
   expireDate.value = ''
+  emit('addNewToken', res.data)
 }
 </script>
 

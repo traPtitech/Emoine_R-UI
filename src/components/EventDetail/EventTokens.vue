@@ -8,6 +8,9 @@ import EventTokenNew from './EventTokenNew.vue'
 defineProps<{
   tokens: Token[]
 }>()
+const emit = defineEmits<{
+  (e: 'addNewToken', token: Token): void
+}>()
 
 const isNewTokenOpen = ref(false)
 const toggleNewToken = () => {
@@ -17,10 +20,6 @@ const toggleNewToken = () => {
 
 <template>
   <div>
-    <h2 :class="$style.heading">
-      <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
-      <p>Tokens</p>
-    </h2>
     <ul :class="$style.tokenList">
       <li
         v-for="token in tokens"
@@ -38,7 +37,11 @@ const toggleNewToken = () => {
           <a-icon name="mdi:plus-circle-outline" />
           新しいトークンを追加
         </button>
-        <event-token-new v-else @close="toggleNewToken" />
+        <event-token-new
+          v-else
+          @close="toggleNewToken"
+          @add-new-token="emit('addNewToken', $event)"
+        />
       </li>
     </ul>
   </div>
@@ -48,11 +51,6 @@ const toggleNewToken = () => {
 .tokenList {
   list-style: none;
   background-color: white;
-}
-.heading {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 .tokenListItem {
   padding: 0.25rem 0;
