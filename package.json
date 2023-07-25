@@ -7,9 +7,13 @@
     "lint": "eslint --ext .ts,.vue src",
     "type-check": "tsc",
     "gen-api": "node ./scripts/gen-api.js",
-    "start-mock": "prism mock -p 8090 -d https://raw.githubusercontent.com/traPtitech/Emoine_R/main/docs/openapi.yml"
+    "start-mock": "prism mock -p 8090 -d https://raw.githubusercontent.com/traPtitech/Emoine_R/main/docs/openapi.yml",
+    "buf": "buf generate ../Emoine_R-server/api/proto/"
   },
   "dependencies": {
+    "@bufbuild/connect": "^0.11.0",
+    "@bufbuild/connect-web": "^0.11.0",
+    "@bufbuild/protobuf": "^1.3.0",
     "@iconify/vue": "^4.1.1",
     "@stoplight/prism-cli": "^5.0.1",
     "axios": "^1.4.0",
@@ -22,6 +26,9 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
+    "@bufbuild/buf": "^1.25.0",
+    "@bufbuild/protoc-gen-connect-es": "^0.11.0",
+    "@bufbuild/protoc-gen-es": "^1.3.0",
     "@openapitools/openapi-generator-cli": "^2.6.0",
     "@types/node": "^20.3.1",
     "@types/throttle-debounce": "^5.0.0",
