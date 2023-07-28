@@ -17,7 +17,7 @@ const emit = defineEmits<{
   (e: 'addNewToken', token: Token): void
 }>()
 
-const adminclient = useConnectClient(AdminAPIService)
+const adminClient = useConnectClient(AdminAPIService)
 
 const route = useRoute()
 const meetingId = getMeetingId(route.params.eventId)
@@ -28,7 +28,7 @@ const expireDate = ref('')
 
 const handleAddToken = async () => {
   // todo: error handling
-  const res = await adminclient.generateToken({
+  const res = await adminClient.generateToken({
     username: userName.value,
     meetingId: meetingId,
     expireAt: Timestamp.fromDate(new Date(expireDate.value + ':00Z')), // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146

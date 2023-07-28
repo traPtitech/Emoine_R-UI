@@ -21,7 +21,6 @@ export interface Reaction extends Omit<ReactionType, 'createdAt'> {
   createdAt: Dayjs
 }
 
-// fixme: undefinedだった場合の処理(そもそもundefinedにならないように生成したい)
 export const convertEvent = (event: MeetingType): Event =>
   Object.assign(event, {
     startedAt: dayjs(event.startedAt?.toDate()),
