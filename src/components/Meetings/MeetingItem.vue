@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Meeting } from '@/lib/apis'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { RouterLink } from 'vue-router'
 import AIcon from '@/components/UI/AIcon.vue'
 import DateChip from '@/components/UI/DateChip.vue'
@@ -30,8 +30,8 @@ defineProps<{
       </div>
       <div :class="$style.rightContainer">
         <date-chip
-          :started-time="new Date(meeting.startedAt)"
-          :ended-time="new Date(meeting.endedAt)"
+          :started-time="meeting.startedAt?.toDate()"
+          :ended-time="meeting.endedAt?.toDate()"
         />
       </div>
     </div>

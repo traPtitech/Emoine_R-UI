@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import apis, { CreateMeetingRequest } from '@/lib/apis'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import { useRouter } from 'vue-router'
+import { useConnectClient } from '@/lib/connectClient'
+import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
+
+const adminClient = useConnectClient(AdminAPIService)
 
 const router = useRouter()
 
@@ -25,12 +28,11 @@ const createMeeting = async () => {
   let id = ''
   try {
     const videoId = getLiveIdFromUrl(liveUrl.value)
-    const meetingInfo: CreateMeetingRequest = {
+    const res = await adminClient.createMeeting({
       videoId: videoId,
       description: ''
-    }
-    const res = (await apis.createMeeting(meetingInfo)).data
-    id = res.id
+    })
+    id = res.meeting?.id
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message)

@@ -4,15 +4,19 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseDateInput from '@/components/UI/BaseDateInput.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
-import apis, { Token } from '@/lib/apis'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { useRoute } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
+import { useConnectClient } from '@/lib/connectClient'
+import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
 
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'addNewToken', token: Token): void
 }>()
+
+const adminclient = useConnectClient(AdminAPIService)
 
 const route = useRoute()
 const meetingId = getMeetingId(route.params.eventId)
@@ -23,7 +27,7 @@ const expireDate = ref('')
 
 const handleAddToken = async () => {
   // todo: error handling
-  const res = await apis.createToken({
+  const res = await adminclient.generateToken({
     username: userName.value,
     meetingId: meetingId,
     expireAt: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
@@ -32,7 +36,7 @@ const handleAddToken = async () => {
   userName.value = ''
   description.value = ''
   expireDate.value = ''
-  emit('addNewToken', res.data)
+  emit('addNewToken', res.token)
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { Meeting } from '@/lib/apis'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { formatDateTime } from '@/utils/date'
 import { useMenuModal } from '@/composables/useMenuModal'
 import { MenuItem } from '@/components/UI/MenuModal.vue'
@@ -60,7 +60,7 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
         </div>
       </div>
       <p :class="$style.startedAt">
-        {{ `${formatDateTime(new Date(meeting.startedAt))}~` }}
+        {{ `${formatDateTime(meeting.startedAt?.toDate())}~` }}
       </p>
       <div
         :is-editing="isDescriptionEditing"

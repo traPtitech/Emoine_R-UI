@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import apis, { CreateMeetingRequest, Meeting, Token } from '@/lib/apis'
 import EventTokens from '@/components/EventDetail/EventTokens.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
+import {
+  Meeting,
+  Token
+} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
+import { useConnectClient } from '@/lib/connectClient'
+import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
+
+const client = useConnectClient(GeneralAPIService)
+const adminClient = useConnectClient(AdminAPIService)
 
 const route = useRoute()
 const router = useRouter()
@@ -16,25 +25,25 @@ const eventDetail = ref<Meeting>()
 const tokens = ref<Token[]>([])
 
 const fetchEventInformation = async () => {
-  const res = (await apis.getMeeting(eventId)).data
-  eventDetail.value = res
+  const res = await client.getMeeting({ id: eventId })
+  eventDetail.value = res.meeting
 }
 const fetchTokens = async () => {
-  const res = (await apis.getMeetingTokens(eventId)).data
-  tokens.value = res
+  const res = await adminClient.getTokens({ meetingId: eventId })
+  tokens.value = res.tokens
 }
 const updateDescription = async (description: string) => {
   if (!eventDetail.value) return
-  const updateMeetingRequest: CreateMeetingRequest = {
+  await adminClient.updateMeeting({
+    meetingId: eventId,
     videoId: eventDetail.value.videoId,
     description: description
-  }
-  await apis.updateMeeting(eventId, updateMeetingRequest)
+  })
 }
 const deleteEvent = async () => {
   const result = confirm('本当にこのイベントを削除しますか？')
   if (!result) return
-  await apis.deleteMeeting(eventId)
+  await adminClient.deleteMeeting({ meetingId: eventId })
   router.push({ name: 'AdminMeetings' })
 }
 

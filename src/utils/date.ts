@@ -12,10 +12,12 @@ export function getDateDiffText(date: Date): string {
   return `${nowDate.diff(pastDate, 'hour')}時間前`
 }
 
-export const formatDate = (date: Date): string => {
+export const formatDate = (date: Date | undefined): string => {
+  if (!date) return ''
   return dayjs(date).format('YYYY/MM/DD')
 }
 
-export const formatDateTime = (date: Date): string => {
+export const formatDateTime = (date: Date | undefined): string => {
+  if (!date) return ''
   return dayjs(date).format('YYYY/MM/DD HH:mm')
 }

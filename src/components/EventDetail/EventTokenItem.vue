@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Token } from '@/lib/apis'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { formatDate } from '@/utils/date'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
@@ -39,7 +39,7 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
     </div>
     <div :class="[$style.containerBase, $style.middleContainer]">
       <p :class="$style.expireDate">
-        {{ formatDate(new Date(token.expireAt)) }}
+        {{ formatDate(token.expireAt?.toDate()) }}
       </p>
     </div>
     <div :class="[$style.containerBase, $style.rightContainer]">

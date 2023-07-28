@@ -6,9 +6,12 @@ import AdminTabs from '@/components/UI/AdminTabs.vue'
 import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
-import apis, { Meeting } from '@/lib/apis'
 import EmoineHeader from '@/components/EmoineHeader.vue'
+import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { useConnectClient } from '@/lib/connectClient'
 
+const client = useConnectClient(GeneralAPIService)
 const route = useRoute()
 const page = ref(getCurrentPage(route.query.page))
 
@@ -26,7 +29,7 @@ const constructLink = (page: number) => `?page=${page}`
 
 const fetchMeetings = async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getAllMeetings(10, page.value)).data
+  const res = await client.getMeetings({ limit: 10, offset: page.value })
   meetings.value = res.meetings
   totalMeetingsCount.value = res.total
 }
