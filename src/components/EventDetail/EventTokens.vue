@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Token } from '@/lib/modelTypes'
 import EventTokenItem from './EventTokenItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'

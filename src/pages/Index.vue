@@ -7,7 +7,7 @@ import MeetingThumbnail from '@/components/MeetingThumbnail/MeetingThumbnail.vue
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import { useConnectClient } from '@/lib/connectClient'
 import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
-import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, convertEvents } from '@/lib/modelTypes'
 
 const client = useConnectClient(GeneralAPIService)
 
@@ -20,14 +20,15 @@ watch(
     await fetchMeetings()
   }
 )
-const meetings = ref<Meeting[]>([])
+const meetings = ref<Event[]>([])
 const totalMeetingsCount = ref(0)
 const constructLink = (page: number) => `?page=${page}`
 
 const fetchMeetings = async () => {
   //todo: エラーハンドリング
   const res = await client.getMeetings({ limit: 12, offset: page.value })
-  meetings.value = res.meetings
+  const convertedRes = convertEvents(res.meetings)
+  meetings.value = convertedRes
   totalMeetingsCount.value = res.total
 }
 

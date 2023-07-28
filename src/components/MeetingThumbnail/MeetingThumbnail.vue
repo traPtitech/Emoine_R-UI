@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/modelTypes'
 import DateChip from '@/components/UI/DateChip.vue'
 
-defineProps<{ meeting: Meeting }>()
+defineProps<{ meeting: Event }>()
 </script>
 
 <template>
@@ -12,8 +12,8 @@ defineProps<{ meeting: Meeting }>()
   >
     <date-chip
       :class="$style.dateChip"
-      :started-time="meeting.startedAt?.toDate()"
-      :ended-time="meeting.endedAt?.toDate()"
+      :started-time="meeting.startedAt"
+      :ended-time="meeting.endedAt"
     />
     <img
       :width="266"

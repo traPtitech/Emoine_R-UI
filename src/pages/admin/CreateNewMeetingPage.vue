@@ -6,6 +6,7 @@ import EmoineHeader from '@/components/EmoineHeader.vue'
 import { useRouter } from 'vue-router'
 import { useConnectClient } from '@/lib/connectClient'
 import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
+import { convertEvent } from '@/lib/modelTypes'
 
 const adminClient = useConnectClient(AdminAPIService)
 
@@ -32,7 +33,9 @@ const createMeeting = async () => {
       videoId: videoId,
       description: ''
     })
-    id = res.meeting?.id
+    if (!res.meeting) throw new Error('response.meeting is undefined')
+    const convertedRes = convertEvent(res.meeting)
+    id = convertedRes.id
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message)
