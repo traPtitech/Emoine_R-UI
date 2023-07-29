@@ -27,8 +27,10 @@ const dateDiffText = computed(() => {
       if (!props.endedTime) return 'LIVE'
       return getDateDiffText(props.endedTime)
     }
-    default:
-      throw new Error(status.value satisfies never)
+    default: {
+      const exhaustivenessCheck: never = status.value
+      throw new Error(`Unexpected Type : ${exhaustivenessCheck}`)
+    }
   }
 })
 </script>
