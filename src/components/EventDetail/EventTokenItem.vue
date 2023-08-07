@@ -84,7 +84,10 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
 .description {
   font-size: 1.25rem;
   margin-left: 20px;
+  width: 36rem;
   color: $text-secondary;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .middleContainer {
   border-right: 1px solid $color-secondary;

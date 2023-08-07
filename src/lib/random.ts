@@ -1,4 +1,5 @@
-export const randomString = (length: number) => {
+export const randomString = (minLen: number, maxLen: number) => {
+  const length = randomNum(minLen, maxLen)
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   let result = ''
   for (let i = 0; i < length; i++) {
@@ -6,6 +7,7 @@ export const randomString = (length: number) => {
   }
   return result
 }
+
 export const randomNum = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min)
 }
