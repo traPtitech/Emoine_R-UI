@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { Event } from '@/lib/modelTypes'
-import { formatDateTime } from '@/utils/date'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { formatDateTime } from '@/lib/date'
 import { useMenuModal } from '@/composables/useMenuModal'
 import { MenuItem } from '@/components/UI/MenuModal.vue'
 import MenuModal from '@/components/UI/MenuModal.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 
-const props = defineProps<{ meeting: Event }>()
+const props = defineProps<{ meeting: Meeting }>()
 const emits = defineEmits<{
   (e: 'updateDescription', description: string): void
   (e: 'delete'): void
@@ -158,3 +158,4 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
   height: 100%;
 }
 </style>
+@/lib/date

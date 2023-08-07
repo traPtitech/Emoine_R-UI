@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Token } from '@/lib/modelTypes'
-import { formatDate } from '@/utils/date'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { formatDate } from '@/lib/date'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 import MenuModal from '@/components/UI/MenuModal.vue'
@@ -112,3 +112,4 @@ const [isMenuModalOpen, toggleMenuModal, itemButtonRef] = useMenuModal()
   }
 }
 </style>
+@/lib/date

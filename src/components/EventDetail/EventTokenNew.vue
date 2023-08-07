@@ -4,7 +4,7 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseDateInput from '@/components/UI/BaseDateInput.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
-import { Token, convertToken } from '@/lib/modelTypes'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { useRoute } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
@@ -35,11 +35,10 @@ const handleAddToken = async () => {
     description: description.value
   })
   if (!res.token) throw new Error('response.token is undefined')
-  const convertedRes = convertToken(res.token)
   userName.value = ''
   description.value = ''
   expireDate.value = ''
-  emit('addNewToken', convertedRes)
+  emit('addNewToken', res.token)
 }
 </script>
 

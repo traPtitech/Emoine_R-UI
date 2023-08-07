@@ -1,4 +1,9 @@
+import { Timestamp } from '@bufbuild/protobuf'
 import dayjs, { Dayjs } from 'dayjs'
+
+export const toDayjs = (date: Timestamp | undefined): Dayjs => {
+  return dayjs(date?.toDate())
+}
 
 export function getDateDiffText(pastDate: Dayjs): string {
   const nowDate = dayjs()
@@ -11,10 +16,12 @@ export function getDateDiffText(pastDate: Dayjs): string {
   return `${nowDate.diff(pastDate, 'hour')}時間前`
 }
 
-export const formatDate = (date: Dayjs): string => {
+export const formatDate = (timeStamp: Timestamp | undefined): string => {
+  const date = toDayjs(timeStamp)
   return date.format('YYYY/MM/DD')
 }
 
-export const formatDateTime = (date: Dayjs): string => {
+export const formatDateTime = (timeStamp: Timestamp | undefined): string => {
+  const date = toDayjs(timeStamp)
   return date.format('YYYY/MM/DD HH:mm')
 }

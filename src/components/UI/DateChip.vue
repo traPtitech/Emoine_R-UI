@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { getDateDiffText } from '@/utils/date'
+import { getDateDiffText } from '@/lib/date'
 import dayjs, { Dayjs } from 'dayjs'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
@@ -71,3 +71,4 @@ const dateDiffText = computed(() => {
   color: #ffffff;
 }
 </style>
+@/lib/date

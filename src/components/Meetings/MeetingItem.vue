@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { Event } from '@/lib/modelTypes'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { RouterLink } from 'vue-router'
 import AIcon from '@/components/UI/AIcon.vue'
 import DateChip from '@/components/UI/DateChip.vue'
+import { toDayjs } from '@/lib/date'
 
 defineProps<{
-  meeting: Event
+  meeting: Meeting
 }>()
 </script>
 
@@ -30,8 +31,8 @@ defineProps<{
       </div>
       <div :class="$style.rightContainer">
         <date-chip
-          :started-time="meeting.startedAt"
-          :ended-time="meeting.endedAt"
+          :started-time="toDayjs(meeting.startedAt)"
+          :ended-time="toDayjs(meeting.endedAt)"
         />
       </div>
     </div>
@@ -90,3 +91,4 @@ defineProps<{
   height: 70%;
 }
 </style>
+@/lib/date

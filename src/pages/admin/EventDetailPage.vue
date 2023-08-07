@@ -6,11 +6,13 @@ import { getMeetingId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
-import { Event, Token, convertTokens } from '@/lib/modelTypes'
+import {
+  Meeting,
+  Token
+} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
 import { useConnectClient } from '@/lib/connectClient'
 import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
-import { convertEvent } from '@/lib/modelTypes'
 
 const client = useConnectClient(GeneralAPIService)
 const adminClient = useConnectClient(AdminAPIService)
@@ -19,19 +21,17 @@ const route = useRoute()
 const router = useRouter()
 const eventId = getMeetingId(route.params.eventId)
 
-const eventDetail = ref<Event>()
+const eventDetail = ref<Meeting>()
 const tokens = ref<Token[]>([])
 
 const fetchEventInformation = async () => {
   const res = await client.getMeeting({ id: eventId })
   if (!res.meeting) throw new Error('res.meeting is undefined')
-  const convertedRes = convertEvent(res.meeting)
-  eventDetail.value = convertedRes
+  eventDetail.value = res.meeting
 }
 const fetchTokens = async () => {
   const res = await adminClient.getTokens({ meetingId: eventId })
-  const convertedTokens = convertTokens(res.tokens)
-  tokens.value = convertedTokens
+  tokens.value = res.tokens
 }
 const updateDescription = async (description: string) => {
   if (!eventDetail.value) return
