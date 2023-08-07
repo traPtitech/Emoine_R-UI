@@ -3,14 +3,14 @@ import { onMounted, ref } from 'vue'
 import apis, { CreateMeetingRequest, Meeting, Token } from '@/lib/apis'
 import EventTokens from '@/components/EventDetail/EventTokens.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getMeetingId } from '@/lib/parsePathParams'
+import { getEventId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
 
 const route = useRoute()
 const router = useRouter()
-const eventId = getMeetingId(route.params.eventId)
+const eventId = getEventId(route.params.eventId)
 
 const eventDetail = ref<Meeting>()
 const tokens = ref<Token[]>([])
@@ -25,17 +25,17 @@ const fetchTokens = async () => {
 }
 const updateDescription = async (description: string) => {
   if (!eventDetail.value) return
-  const updateMeetingRequest: CreateMeetingRequest = {
+  const updateEventRequest: CreateMeetingRequest = {
     videoId: eventDetail.value.videoId,
     description: description
   }
-  await apis.updateMeeting(eventId, updateMeetingRequest)
+  await apis.updateMeeting(eventId, updateEventRequest)
 }
 const deleteEvent = async () => {
   const result = confirm('本当にこのイベントを削除しますか？')
   if (!result) return
   await apis.deleteMeeting(eventId)
-  router.push({ name: 'AdminMeetings' })
+  router.push({ name: 'AdminEvents' })
 }
 
 onMounted(async () => {
@@ -54,7 +54,7 @@ onMounted(async () => {
       </h2>
       <event-information
         v-if="eventDetail"
-        :meeting="eventDetail"
+        :event="eventDetail"
         @update-description="updateDescription($event)"
         @delete="deleteEvent"
       />

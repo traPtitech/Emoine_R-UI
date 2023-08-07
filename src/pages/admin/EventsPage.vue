@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getCurrentPage } from '@/lib/parseQueryParams'
-import MeetingItem from '@/components/Meetings/MeetingItem.vue'
+import EventItem from '@/components/Events/EventItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import apis, { Meeting } from '@/lib/apis'
@@ -15,36 +15,32 @@ watch(
   () => route.query.page,
   async newPage => {
     page.value = getCurrentPage(newPage)
-    await fetchMeetings()
+    await fetchEvents()
   }
 )
 
-const meetings = ref<Meeting[]>([])
-const totalMeetingsCount = ref()
+const events = ref<Meeting[]>([])
+const totalEventsCount = ref()
 const constructLink = (page: number) => `?page=${page}`
 
-const fetchMeetings = async () => {
+const fetchEvents = async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getAllMeetings(10, page.value)).data
-  meetings.value = res.meetings
-  totalMeetingsCount.value = res.total
+  const res = (await apis.getMeetings(10, page.value)).data
+  events.value = res.meetings
+  totalEventsCount.value = res.total
 }
 
-onMounted(fetchMeetings)
+onMounted(fetchEvents)
 </script>
 
 <template>
   <emoine-header />
-  <ul :class="$style.meetingList">
-    <li
-      v-for="meeting in meetings"
-      :key="meeting.id"
-      :class="$style.meetingListItem"
-    >
-      <meeting-item :meeting="meeting" />
+  <ul :class="$style.eventList">
+    <li v-for="event in events" :key="event.id" :class="$style.eventListItem">
+      <event-item :event="event" />
     </li>
     <li :class="$style.newEventButtonContainer">
-      <router-link to="/admin/meetings/new" :class="$style.newEventLink">
+      <router-link to="/admin/events/new" :class="$style.newEventLink">
         <a-icon name="mdi:plus-circle-outline" />
         新しいイベントを作成
       </router-link>
@@ -53,19 +49,19 @@ onMounted(fetchMeetings)
   <div :class="$style.paginationBarContainer">
     <pagination-bar
       :current-page="page"
-      :total-page="Math.ceil(totalMeetingsCount / 10)"
+      :total-page="Math.ceil(totalEventsCount / 10)"
       :construct-link="constructLink"
     />
   </div>
 </template>
 
 <style lang="scss" module>
-.meetingList {
+.eventList {
   margin: 0 20%;
   list-style: none;
   background-color: white;
 }
-.meetingListItem {
+.eventListItem {
   padding: 4px 0px;
   &:not(:last-child) {
     border-bottom: 1px solid $background-secondary;
