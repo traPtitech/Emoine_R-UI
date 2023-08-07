@@ -20,7 +20,7 @@ watch(
     await fetchMeetings()
   }
 )
-const meetings = ref<Meeting[]>([])
+const meetings = ref<Meeting[]>()
 const totalMeetingsCount = ref(0)
 const constructLink = (page: number) => `?page=${page}`
 

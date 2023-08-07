@@ -22,7 +22,7 @@ const router = useRouter()
 const eventId = getMeetingId(route.params.eventId)
 
 const eventDetail = ref<Meeting>()
-const tokens = ref<Token[]>([])
+const tokens = ref<Token[]>()
 
 const fetchEventInformation = async () => {
   const res = await client.getMeeting({ id: eventId })
@@ -74,7 +74,10 @@ onMounted(async () => {
         <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
         <p>Tokens</p>
       </h2>
-      <event-tokens :tokens="tokens" @add-new-token="tokens.unshift($event)" />
+      <event-tokens
+        :tokens="tokens ?? []"
+        @add-new-token="tokens?.unshift($event)"
+      />
     </section>
   </div>
 </template>

@@ -23,7 +23,7 @@ watch(
   }
 )
 
-const meetings = ref<Meeting[]>([])
+const meetings = ref<Meeting[]>()
 const totalMeetingsCount = ref()
 const constructLink = (page: number) => `?page=${page}`
 
