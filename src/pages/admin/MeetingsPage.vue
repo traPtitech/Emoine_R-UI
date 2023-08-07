@@ -2,7 +2,6 @@
 import { onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getCurrentPage } from '@/lib/parseQueryParams'
-import AdminTabs from '@/components/UI/AdminTabs.vue'
 import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
@@ -36,23 +35,21 @@ onMounted(fetchMeetings)
 
 <template>
   <emoine-header />
-  <admin-tabs current-tab="events" :class="$style.tabs">
-    <ul :class="$style.meetingList">
-      <li
-        v-for="meeting in meetings"
-        :key="meeting.id"
-        :class="$style.meetingListItem"
-      >
-        <meeting-item :meeting="meeting" />
-      </li>
-      <li :class="$style.newEventButtonContainer">
-        <router-link to="/admin/meetings/new" :class="$style.newEventLink">
-          <a-icon name="mdi:plus-circle-outline" />
-          新しいイベントを作成
-        </router-link>
-      </li>
-    </ul>
-  </admin-tabs>
+  <ul :class="$style.meetingList">
+    <li
+      v-for="meeting in meetings"
+      :key="meeting.id"
+      :class="$style.meetingListItem"
+    >
+      <meeting-item :meeting="meeting" />
+    </li>
+    <li :class="$style.newEventButtonContainer">
+      <router-link to="/admin/meetings/new" :class="$style.newEventLink">
+        <a-icon name="mdi:plus-circle-outline" />
+        新しいイベントを作成
+      </router-link>
+    </li>
+  </ul>
   <div :class="$style.paginationBarContainer">
     <pagination-bar
       :current-page="page"
@@ -63,10 +60,8 @@ onMounted(fetchMeetings)
 </template>
 
 <style lang="scss" module>
-.tabs {
-  margin: 0 20%;
-}
 .meetingList {
+  margin: 0 20%;
   list-style: none;
   background-color: white;
 }
