@@ -91,4 +91,3 @@ defineProps<{
   height: 70%;
 }
 </style>
-@/lib/date

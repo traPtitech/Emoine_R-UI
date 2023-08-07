@@ -72,4 +72,3 @@ defineProps<{ meeting: Meeting }>()
   overflow: hidden;
 }
 </style>
-@/lib/date
