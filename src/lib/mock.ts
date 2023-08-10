@@ -19,7 +19,7 @@ import {
   Comment,
   Reaction
 } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
-import { randomNum, randomString } from '@/lib/random'
+import { randomDate, randomString } from '@/lib/random'
 import { ServiceImpl } from '@bufbuild/connect'
 import { Timestamp } from '@bufbuild/protobuf'
 
@@ -35,14 +35,8 @@ export const exampleEvents = (n: number): Meeting[] =>
           title: randomString(5, 20),
           thumbnail:
             'https://media.connpass.com/thumbs/b0/fc/b0fcaa37725965741cada4eaf9b730af.png',
-          startedAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          }),
-          endedAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          })
+          startedAt: Timestamp.fromDate(randomDate()),
+          endedAt: Timestamp.fromDate(randomDate())
         })
     )
 export const exampleEvent = exampleEvents(1)[0]
@@ -59,14 +53,8 @@ export const exampleTokens = (n: number): Token[] =>
           meetingId: randomString(5, 32),
           creatorId: randomString(5, 32),
           description: randomString(5, 100),
-          createdAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          }),
-          expireAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          })
+          createdAt: Timestamp.fromDate(randomDate()),
+          expireAt: Timestamp.fromDate(randomDate())
         })
     )
 export const exampleToken = exampleTokens(1)[0]
@@ -82,10 +70,7 @@ export const exampleComments = (n: number): Comment[] =>
           text: randomString(5, 100),
           isAnonymous: false,
           color: '#000000',
-          createdAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          })
+          createdAt: Timestamp.fromDate(randomDate())
         })
     )
 const exampleComment = exampleComments(1)[0]
@@ -99,10 +84,7 @@ export const exampleReactions = (n: number): Reaction[] =>
           meetingId: randomString(5, 32),
           username: randomString(5, 20),
           stampId: randomString(5, 32),
-          createdAt: new Timestamp({
-            seconds: BigInt(randomNum(0, 1000000000)),
-            nanos: randomNum(0, 1000000)
-          })
+          createdAt: Timestamp.fromDate(randomDate())
         })
     )
 const exampleReaction = exampleReactions(1)[0]
