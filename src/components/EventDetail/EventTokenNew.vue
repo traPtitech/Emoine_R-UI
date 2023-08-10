@@ -8,16 +8,15 @@ import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { useRoute } from 'vue-router'
 import { getMeetingId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
-import { useConnectClient } from '@/lib/connectClient'
-import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
 import { Timestamp } from '@bufbuild/protobuf'
+import { useAdminConnectClient } from '@/lib/connectClient'
 
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'addNewToken', token: Token): void
 }>()
 
-const adminClient = useConnectClient(AdminAPIService)
+const adminClient = useAdminConnectClient()
 
 const route = useRoute()
 const meetingId = getMeetingId(route.params.eventId)

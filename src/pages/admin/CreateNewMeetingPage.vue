@@ -4,10 +4,9 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import { useRouter } from 'vue-router'
-import { useConnectClient } from '@/lib/connectClient'
-import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
+import { useAdminConnectClient } from '@/lib/connectClient'
 
-const adminClient = useConnectClient(AdminAPIService)
+const adminClient = useAdminConnectClient()
 
 const router = useRouter()
 

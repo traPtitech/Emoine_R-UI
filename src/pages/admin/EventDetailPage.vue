@@ -10,12 +10,13 @@ import {
   Meeting,
   Token
 } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
-import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
-import { useConnectClient } from '@/lib/connectClient'
-import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
+import {
+  useGeneralConnectClient,
+  useAdminConnectClient
+} from '@/lib/connectClient'
 
-const client = useConnectClient(GeneralAPIService)
-const adminClient = useConnectClient(AdminAPIService)
+const client = useGeneralConnectClient()
+const adminClient = useAdminConnectClient()
 
 const route = useRoute()
 const router = useRouter()

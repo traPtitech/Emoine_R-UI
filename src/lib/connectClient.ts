@@ -33,7 +33,7 @@ const connectTransport = createConnectTransport({
   baseUrl: 'http://localhost:8090'
 })
 
-export const useConnectClient = <T extends ServiceType>(
+const useConnectClient = <T extends ServiceType>(
   service: T
 ): PromiseClient<T> => {
   const transport = ENABLE_MOCK
@@ -41,3 +41,6 @@ export const useConnectClient = <T extends ServiceType>(
     : connectTransport
   return createPromiseClient(service, transport)
 }
+
+export const useGeneralConnectClient = () => useConnectClient(GeneralAPIService)
+export const useAdminConnectClient = () => useConnectClient(AdminAPIService)

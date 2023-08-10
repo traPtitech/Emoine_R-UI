@@ -7,11 +7,10 @@ import MeetingItem from '@/components/Meetings/MeetingItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
-import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
 import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
-import { useConnectClient } from '@/lib/connectClient'
+import { useGeneralConnectClient } from '@/lib/connectClient'
 
-const client = useConnectClient(GeneralAPIService)
+const client = useGeneralConnectClient()
 const route = useRoute()
 const page = ref(getCurrentPage(route.query.page))
 
