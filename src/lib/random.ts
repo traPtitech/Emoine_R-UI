@@ -15,9 +15,7 @@ export const randomNum = (min: number, max: number) => {
 }
 
 export const randomDate = () => {
-  const start = dayjs().subtract(1, 'month')
+  const start = dayjs().subtract(1, 'week')
   const end = dayjs().add(1, 'week')
-  const diff = end.diff(start, 'day')
-  const randomDiff = randomNum(0, diff)
-  return start.add(randomDiff, 'day').toDate()
+  return new Date(randomNum(start.valueOf(), end.valueOf()))
 }

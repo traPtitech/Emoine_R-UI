@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const status = computed((): LiveStatus => {
   /* todo: endedTimeが存在しないときのサーバーからのデータの仕様に合わせる */
-  if (dayjs().unix() < props.startedTime.unix()) return 'isPlanned'
+  if (props.startedTime.isAfter(dayjs().valueOf())) return 'isPlanned'
   if (!props.endedTime.isValid()) return 'isStreaming'
   return 'isArchived'
 })
