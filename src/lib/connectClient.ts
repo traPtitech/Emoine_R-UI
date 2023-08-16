@@ -7,10 +7,7 @@ import {
   createPromiseClient,
   createRouterTransport
 } from '@bufbuild/connect'
-import {
-  ConnectTransportOptions,
-  createConnectTransport
-} from '@bufbuild/connect-web'
+import { createConnectTransport } from '@bufbuild/connect-web'
 import { ServiceType } from '@bufbuild/protobuf'
 
 const ENABLE_MOCK = true
@@ -27,11 +24,6 @@ const logger: Interceptor = next => async req => {
   return res
 }
 
-const transport: ConnectTransportOptions = {
-  baseUrl: 'http://localhost:8090',
-  interceptors: [logger]
-}
-
 const connectMockTransport = (serviceType: ServiceType) =>
   createRouterTransport(
     ({ service }) => {
@@ -44,10 +36,18 @@ const connectMockTransport = (serviceType: ServiceType) =>
           throw new Error('invalid service type')
       }
     },
-    { transport }
+    {
+      transport: {
+        baseUrl: 'http://localhost:8090',
+        interceptors: [logger]
+      }
+    }
   )
 
-const connectTransport = createConnectTransport(transport)
+const connectTransport = createConnectTransport({
+  baseUrl: 'http://localhost:8090',
+  interceptors: [logger]
+})
 
 const useConnectClient = <T extends ServiceType>(
   service: T
