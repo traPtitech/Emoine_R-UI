@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { getDateDiffText } from '@/lib/date'
-import dayjs, { Dayjs } from 'dayjs'
+import { Dayjs } from 'dayjs'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const status = computed((): LiveStatus => {
   /* todo: endedTimeが存在しないときのサーバーからのデータの仕様に合わせる */
-  if (props.startedTime.isAfter(dayjs().valueOf())) return 'isPlanned'
+  if (props.startedTime.isAfter(Date.now())) return 'isPlanned'
   if (!props.endedTime.isValid()) return 'isStreaming'
   return 'isArchived'
 })
