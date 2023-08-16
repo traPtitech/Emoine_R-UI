@@ -2,14 +2,35 @@ import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_ap
 import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
 import { adminApiMock, generalApiMock } from '@/lib/mock'
 import {
+  Interceptor,
   PromiseClient,
   createPromiseClient,
   createRouterTransport
 } from '@bufbuild/connect'
-import { createConnectTransport } from '@bufbuild/connect-web'
+import {
+  ConnectTransportOptions,
+  createConnectTransport
+} from '@bufbuild/connect-web'
 import { ServiceType } from '@bufbuild/protobuf'
 
 const ENABLE_MOCK = true
+
+const logger: Interceptor = next => async req => {
+  // eslint-disable-next-line no-console
+  console.log('request: ', req.url, req.message)
+  const res = await next(req)
+  if (!res.stream) {
+    // eslint-disable-next-line no-console
+    console.log('response:', res.message)
+  }
+  //TODO: streamのときのログ
+  return res
+}
+
+const transport: ConnectTransportOptions = {
+  baseUrl: 'http://localhost:8090',
+  interceptors: [logger]
+}
 
 const connectMockTransport = (serviceType: ServiceType) =>
   createRouterTransport(
@@ -23,15 +44,10 @@ const connectMockTransport = (serviceType: ServiceType) =>
           throw new Error('invalid service type')
       }
     },
-    {
-      transport: {
-        baseUrl: 'http://localhost:8090'
-      }
-    }
+    { transport }
   )
-const connectTransport = createConnectTransport({
-  baseUrl: 'http://localhost:8090'
-})
+
+const connectTransport = createConnectTransport(transport)
 
 const useConnectClient = <T extends ServiceType>(
   service: T
