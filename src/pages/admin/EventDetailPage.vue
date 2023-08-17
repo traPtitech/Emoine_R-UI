@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import EventTokens from '@/components/EventDetail/EventTokens.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getMeetingId } from '@/lib/parsePathParams'
+import { getEventId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
@@ -20,7 +20,7 @@ const adminClient = useAdminConnectClient()
 
 const route = useRoute()
 const router = useRouter()
-const eventId = getMeetingId(route.params.eventId)
+const eventId = getEventId(route.params.eventId)
 
 const eventDetail = ref<Meeting>()
 const tokens = ref<Token[]>()
@@ -46,7 +46,7 @@ const deleteEvent = async () => {
   const result = confirm('本当にこのイベントを削除しますか？')
   if (!result) return
   await adminClient.deleteMeeting({ meetingId: eventId })
-  router.push({ name: 'AdminMeetings' })
+  router.push({ name: 'AdminEvents' })
 }
 
 onMounted(async () => {
@@ -65,7 +65,7 @@ onMounted(async () => {
       </h2>
       <event-information
         v-if="eventDetail"
-        :meeting="eventDetail"
+        :event="eventDetail"
         @update-description="updateDescription($event)"
         @delete="deleteEvent"
       />

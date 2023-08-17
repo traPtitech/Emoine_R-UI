@@ -6,7 +6,7 @@ import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
 import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { useRoute } from 'vue-router'
-import { getMeetingId } from '@/lib/parsePathParams'
+import { getEventId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 import { Timestamp } from '@bufbuild/protobuf'
 import { useAdminConnectClient } from '@/lib/connectClient'
@@ -19,7 +19,7 @@ const emit = defineEmits<{
 const adminClient = useAdminConnectClient()
 
 const route = useRoute()
-const meetingId = getMeetingId(route.params.eventId)
+const eventId = getEventId(route.params.eventId)
 
 const userName = ref('')
 const description = ref('')
@@ -29,7 +29,7 @@ const handleAddToken = async () => {
   // todo: error handling
   const res = await adminClient.generateToken({
     username: userName.value,
-    meetingId: meetingId,
+    meetingId: eventId,
     expireAt: Timestamp.fromDate(new Date(expireDate.value + ':00Z')), // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
     description: description.value
   })

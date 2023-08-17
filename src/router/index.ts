@@ -7,15 +7,15 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/Index.vue')
   },
   {
-    path: '/meeting/:id',
-    name: 'Meeting',
+    path: '/event/:id',
+    name: 'Event',
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     component: () => {} // TODO: ページ作成したらここに書く
   },
   {
-    path: '/admin/meetings',
-    name: 'AdminMeetings',
-    component: () => import('@/pages/admin/MeetingsPage.vue')
+    path: '/admin/events',
+    name: 'AdminEvents',
+    component: () => import('@/pages/admin/EventsPage.vue')
   },
   {
     path: '/admin/events/:eventId',
@@ -23,9 +23,9 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/admin/EventDetailPage.vue')
   },
   {
-    path: '/admin/meetings/new',
-    name: 'AdminNewMeetings',
-    component: () => import('@/pages/admin/CreateNewMeetingPage.vue')
+    path: '/admin/events/new',
+    name: 'AdminNewEvents',
+    component: () => import('@/pages/admin/CreateNewEventPage.vue')
   },
   {
     path: '/:path(.*)',
