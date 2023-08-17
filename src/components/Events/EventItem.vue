@@ -5,33 +5,33 @@ import AIcon from '@/components/UI/AIcon.vue'
 import DateChip from '@/components/UI/DateChip.vue'
 
 defineProps<{
-  meeting: Meeting
+  event: Meeting
 }>()
 </script>
 
 <template>
   <router-link
-    :to="{ name: 'AdminEventDetail', params: { eventId: meeting.id } }"
+    :to="{ name: 'AdminEventDetail', params: { eventId: event.id } }"
     :class="$style.link"
   >
     <div :class="$style.container">
       <img
         :height="44"
         :width="80"
-        :src="meeting.thumbnail"
+        :src="event.thumbnail"
         :class="$style.thumbnail"
       />
       <div :class="$style.leftContainer">
-        <p :class="$style.title">{{ meeting.title }}</p>
+        <p :class="$style.title">{{ event.title }}</p>
         <a-icon name="tabler:certificate" :size="32" color="#ff007f" />
       </div>
       <div :class="$style.middleContainer">
-        <p :class="$style.videoId">{{ meeting.videoId }}</p>
+        <p :class="$style.videoId">{{ event.videoId }}</p>
       </div>
       <div :class="$style.rightContainer">
         <date-chip
-          :started-time="new Date(meeting.startedAt)"
-          :ended-time="new Date(meeting.endedAt)"
+          :started-time="new Date(event.startedAt)"
+          :ended-time="new Date(event.endedAt)"
         />
       </div>
     </div>

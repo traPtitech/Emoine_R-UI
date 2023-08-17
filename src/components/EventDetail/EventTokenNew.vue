@@ -6,7 +6,7 @@ import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
 import apis, { Token } from '@/lib/apis'
 import { useRoute } from 'vue-router'
-import { getMeetingId } from '@/lib/parsePathParams'
+import { getEventId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
 
 const emit = defineEmits<{
@@ -15,7 +15,7 @@ const emit = defineEmits<{
 }>()
 
 const route = useRoute()
-const meetingId = getMeetingId(route.params.eventId)
+const eventId = getEventId(route.params.eventId)
 
 const userName = ref('')
 const description = ref('')
@@ -25,7 +25,7 @@ const handleAddToken = async () => {
   // todo: error handling
   const res = await apis.createToken({
     username: userName.value,
-    meetingId: meetingId,
+    meetingId: eventId,
     expireAt: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
     description: description.value
   })

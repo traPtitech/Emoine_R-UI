@@ -2,29 +2,29 @@
 import { Meeting } from '@/lib/apis'
 import DateChip from '@/components/UI/DateChip.vue'
 
-defineProps<{ meeting: Meeting }>()
+defineProps<{ event: Meeting }>()
 </script>
 
 <template>
   <router-link
-    :to="{ name: 'Meeting', params: { id: meeting.id } }"
+    :to="{ name: 'Event', params: { id: event.id } }"
     :class="$style.container"
   >
     <date-chip
       :class="$style.dateChip"
-      :started-time="new Date(meeting.startedAt)"
-      :ended-time="new Date(meeting.endedAt)"
+      :started-time="new Date(event.startedAt)"
+      :ended-time="new Date(event.endedAt)"
     />
     <img
       :width="266"
       :height="150"
-      :src="meeting.thumbnail"
-      :alt="`${meeting.title}のサムネイル画像`"
+      :src="event.thumbnail"
+      :alt="`${event.title}のサムネイル画像`"
       :class="$style.thumbnail"
     />
     <div :class="$style.textContainer">
-      <p :class="$style.title">{{ meeting.title }}</p>
-      <p :class="$style.description">{{ meeting.description }}</p>
+      <p :class="$style.title">{{ event.title }}</p>
+      <p :class="$style.description">{{ event.description }}</p>
     </div>
   </router-link>
 </template>

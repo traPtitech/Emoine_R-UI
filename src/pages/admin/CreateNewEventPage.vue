@@ -21,15 +21,15 @@ const getLiveIdFromUrl = (liveUrl: string) => {
   return videoId
 }
 
-const createMeeting = async () => {
+const createEvent = async () => {
   let id = ''
   try {
     const videoId = getLiveIdFromUrl(liveUrl.value)
-    const meetingInfo: CreateMeetingRequest = {
+    const eventInfo: CreateMeetingRequest = {
       videoId: videoId,
       description: ''
     }
-    const res = (await apis.createMeeting(meetingInfo)).data
+    const res = (await apis.createMeeting(eventInfo)).data
     id = res.id
   } catch (e: unknown) {
     if (e instanceof Error) {
@@ -63,7 +63,7 @@ const createMeeting = async () => {
             placeholder="YouTubeのライブURLを入力..."
           />
         </div>
-        <base-button @click="createMeeting">追加</base-button>
+        <base-button @click="createEvent">追加</base-button>
       </div>
     </div>
   </div>
