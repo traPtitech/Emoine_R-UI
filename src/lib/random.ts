@@ -19,3 +19,8 @@ export const randomDate = () => {
   const end = dayjs().add(1, 'week')
   return new Date(randomNum(start.valueOf(), end.valueOf()))
 }
+
+export const randomSleep = () => {
+  const ms = randomNum(1000, 5000)
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
