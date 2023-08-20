@@ -100,28 +100,25 @@ export const generalApiMock: Partial<ServiceImpl<typeof GeneralAPIService>> = {
     new GetEventReactionsResponse({
       reactions: exampleReactions(10)
     }),
-  connectToEventStream: async function* introduce() {
-    await randomSleep()
-    yield new ConnectToEventStreamResponse({
-      streamEvent: {
-        value: exampleComment,
-        case: 'comment'
-      }
-    })
-    await randomSleep()
-    yield new ConnectToEventStreamResponse({
-      streamEvent: {
-        value: exampleReaction,
-        case: 'reaction'
-      }
-    })
-    await randomSleep()
-    yield new ConnectToEventStreamResponse({
-      streamEvent: {
-        value: exampleComment,
-        case: 'comment'
-      }
-    })
+  connectToEventStream: async function* connectToEventStream() {
+    const comments = exampleComments(10)
+    const reactions = exampleReactions(10)
+    for (let i = 0; i < 10; i++) {
+      await randomSleep()
+      yield new ConnectToEventStreamResponse({
+        streamEvent: {
+          value: comments[i],
+          case: 'comment'
+        }
+      })
+      await randomSleep()
+      yield new ConnectToEventStreamResponse({
+        streamEvent: {
+          value: reactions[i],
+          case: 'reaction'
+        }
+      })
+    }
   },
   sendComment: () => new SendCommentResponse({ comment: exampleComment }),
   sendReaction: () => new SendReactionResponse({ reaction: exampleReaction })
