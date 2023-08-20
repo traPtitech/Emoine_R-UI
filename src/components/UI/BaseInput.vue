@@ -29,10 +29,13 @@ const value = computed({
 <style lang="scss" module>
 .input {
   background-color: white;
-  padding: 0.75rem 0.625rem;
-  border-radius: 0.25rem;
+  display: flex;
+  padding: 0.375rem 0.625rem;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 0.375rem;
   height: 2.5rem;
-  font-size: 0.875rem;
+  font-size: 1.25rem;
   border: 1px solid $color-secondary;
 
   &::placeholder {

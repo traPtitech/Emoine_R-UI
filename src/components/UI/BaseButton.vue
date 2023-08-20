@@ -19,10 +19,11 @@ const props = withDefaults(
 .button {
   display: flex;
   align-items: center;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  height: 1.875rem;
-  font-size: 0.75rem;
+  border-radius: 0.375rem;
+  padding: 0.375rem 1rem;
+  height: 2.25rem;
+  min-width: 4rem;
+  font-size: 1rem;
 
   &[data-type='primary'] {
     color: white;
