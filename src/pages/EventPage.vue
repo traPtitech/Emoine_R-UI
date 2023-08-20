@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import apis, { Meeting, Comment } from '@/lib/apis'
-import { parseId } from '@/lib/parsePathParams'
+import { getEventId } from '@/lib/parsePathParams'
 import CommentPanel from '@/components/CommentPanel/CommentPanel.vue'
 import StampList from '@/components/StampList/StampList.vue'
 import { Stamp } from '@/components/StampList/StampList.vue'
+import { useGeneralConnectClient } from '@/lib/connectClient'
+import {
+  Meeting,
+  Comment
+} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 
 const route = useRoute()
-const eventId = parseId(route.params.id)
+const client = useGeneralConnectClient()
+
+const eventId = getEventId(route.params.id)
 const event = ref<Meeting>()
-const comments = ref<Comment[]>([])
+const comments = ref<Comment[]>()
 
 const stamps: Stamp[] = Array(10).fill({
   stampId: 'aaa',
@@ -20,13 +26,19 @@ const stamps: Stamp[] = Array(10).fill({
 
 const fetchMeeting = async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getMeeting(eventId)).data
-  event.value = res
+  const res = await client.getMeeting({ id: eventId })
+  if (!res.meeting) {
+    throw new Error('res.meeting is undefined')
+  }
+  event.value = res.meeting
 }
 const fetchComments = async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getComment(eventId)).data
-  comments.value = res
+  const res = await client.getMeetingComments({ meetingId: eventId })
+  if (!res.comments) {
+    throw new Error('res.comment is undefined')
+  }
+  comments.value = res.comments
 }
 
 onMounted(() => {
@@ -46,7 +58,7 @@ onMounted(() => {
         <stamp-list :stamps="stamps" :class="$style.stampList" />
       </div>
     </div>
-    <comment-panel :comments="comments" :show-overlay="false" />
+    <comment-panel :comments="comments ?? []" :show-overlay="false" />
   </div>
 </template>
 
