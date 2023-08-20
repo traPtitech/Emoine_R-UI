@@ -1,27 +1,26 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { getDateDiffText } from '@/utils/date'
+import { getDateDiffText } from '@/lib/date'
+import { Dayjs } from 'dayjs'
 
 type LiveStatus = 'isPlanned' | 'isStreaming' | 'isArchived'
 
 const props = defineProps<{
-  startedTime: Date
-  endedTime: Date
+  startedTime: Dayjs
+  endedTime: Dayjs
 }>()
 
 const status = computed((): LiveStatus => {
   /* todo: endedTimeが存在しないときのサーバーからのデータの仕様に合わせる */
-  if (new Date().getTime() < props.startedTime.getTime()) return 'isPlanned'
-  if (isNaN(props.endedTime.getTime())) return 'isStreaming'
+  if (props.startedTime.isAfter(Date.now())) return 'isPlanned'
+  if (!props.endedTime.isValid()) return 'isStreaming'
   return 'isArchived'
 })
 
 const dateDiffText = computed(() => {
   switch (status.value) {
     case 'isPlanned':
-      return `${
-        props.startedTime.getMonth() + 1
-      }/${props.startedTime.getDate()}`
+      return `${props.startedTime.month() + 1}/${props.startedTime.date()}`
     case 'isStreaming':
       return 'LIVE'
     case 'isArchived': {

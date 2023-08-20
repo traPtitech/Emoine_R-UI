@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Comment } from '@/lib/apis/generated'
+import { Comment } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 
 const props = defineProps<{
   comment: Comment

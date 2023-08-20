@@ -1,40 +1,51 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import apis, { CreateMeetingRequest, Meeting, Token } from '@/lib/apis'
 import EventTokens from '@/components/EventDetail/EventTokens.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getEventId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
+import {
+  Meeting,
+  Token
+} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import {
+  useGeneralConnectClient,
+  useAdminConnectClient
+} from '@/lib/connectClient'
+
+const client = useGeneralConnectClient()
+const adminClient = useAdminConnectClient()
 
 const route = useRoute()
 const router = useRouter()
 const eventId = getEventId(route.params.eventId)
 
 const eventDetail = ref<Meeting>()
-const tokens = ref<Token[]>([])
+const tokens = ref<Token[]>()
 
 const fetchEventInformation = async () => {
-  const res = (await apis.getMeeting(eventId)).data
-  eventDetail.value = res
+  const res = await client.getMeeting({ id: eventId })
+  if (!res.meeting) throw new Error('res.meeting is undefined')
+  eventDetail.value = res.meeting
 }
 const fetchTokens = async () => {
-  const res = (await apis.getMeetingTokens(eventId)).data
-  tokens.value = res
+  const res = await adminClient.getTokens({ meetingId: eventId })
+  tokens.value = res.tokens
 }
 const updateDescription = async (description: string) => {
   if (!eventDetail.value) return
-  const updateEventRequest: CreateMeetingRequest = {
+  await adminClient.updateMeeting({
+    meetingId: eventId,
     videoId: eventDetail.value.videoId,
     description: description
-  }
-  await apis.updateMeeting(eventId, updateEventRequest)
+  })
 }
 const deleteEvent = async () => {
   const result = confirm('本当にこのイベントを削除しますか？')
   if (!result) return
-  await apis.deleteMeeting(eventId)
+  await adminClient.deleteMeeting({ meetingId: eventId })
   router.push({ name: 'AdminEvents' })
 }
 
@@ -64,7 +75,10 @@ onMounted(async () => {
         <a-icon name="tabler:certificate" :size="56" color="#ff007f" />
         <p>Tokens</p>
       </h2>
-      <event-tokens :tokens="tokens" @add-new-token="tokens.unshift($event)" />
+      <event-tokens
+        :tokens="tokens ?? []"
+        @add-new-token="tokens?.unshift($event)"
+      />
     </section>
   </div>
 </template>

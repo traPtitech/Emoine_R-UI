@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Token } from '@/lib/apis'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import EventTokenItem from './EventTokenItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
@@ -23,7 +23,7 @@ const toggleNewToken = () => {
     <ul :class="$style.tokenList">
       <li
         v-for="token in tokens"
-        :key="token.token"
+        :key="token.raw"
         :class="$style.tokenListItem"
       >
         <event-token-item :token="token" />

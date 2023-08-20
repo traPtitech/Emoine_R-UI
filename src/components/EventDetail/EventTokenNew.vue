@@ -4,15 +4,19 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseDateInput from '@/components/UI/BaseDateInput.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import { ref } from 'vue'
-import apis, { Token } from '@/lib/apis'
+import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import { useRoute } from 'vue-router'
 import { getEventId } from '@/lib/parsePathParams'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'
+import { Timestamp } from '@bufbuild/protobuf'
+import { useAdminConnectClient } from '@/lib/connectClient'
 
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'addNewToken', token: Token): void
 }>()
+
+const adminClient = useAdminConnectClient()
 
 const route = useRoute()
 const eventId = getEventId(route.params.eventId)
@@ -23,16 +27,17 @@ const expireDate = ref('')
 
 const handleAddToken = async () => {
   // todo: error handling
-  const res = await apis.createToken({
+  const res = await adminClient.generateToken({
     username: userName.value,
     meetingId: eventId,
-    expireAt: expireDate.value + ':00Z', // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
+    expireAt: Timestamp.fromDate(new Date(expireDate.value + ':00Z')), // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
     description: description.value
   })
+  if (!res.token) throw new Error('response.token is undefined')
   userName.value = ''
   description.value = ''
   expireDate.value = ''
-  emit('addNewToken', res.data)
+  emit('addNewToken', res.token)
 }
 </script>
 

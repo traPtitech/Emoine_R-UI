@@ -5,9 +5,11 @@ import { getCurrentPage } from '@/lib/parseQueryParams'
 import EventItem from '@/components/Events/EventItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
-import apis, { Meeting } from '@/lib/apis'
 import EmoineHeader from '@/components/EmoineHeader.vue'
+import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { useGeneralConnectClient } from '@/lib/connectClient'
 
+const client = useGeneralConnectClient()
 const route = useRoute()
 const page = ref(getCurrentPage(route.query.page))
 
@@ -19,13 +21,13 @@ watch(
   }
 )
 
-const events = ref<Meeting[]>([])
+const events = ref<Meeting[]>()
 const totalEventsCount = ref()
 const constructLink = (page: number) => `?page=${page}`
 
 const fetchEvents = async () => {
   //todo: エラーハンドリング
-  const res = (await apis.getMeetings(10, page.value)).data
+  const res = await client.getMeetings({ limit: 10, offset: page.value })
   events.value = res.meetings
   totalEventsCount.value = res.total
 }
