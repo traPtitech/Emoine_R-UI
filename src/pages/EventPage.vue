@@ -105,7 +105,7 @@ onMounted(async () => {
   )
   switch (eventStatus) {
     case 'isPlanned':
-      connectToEventStream()
+      //TODO: 表示を考える
       break
     case 'isStreaming':
       connectToEventStream()
