@@ -76,9 +76,6 @@ onMounted(() => {
   width: 100%;
   aspect-ratio: 16 / 9;
 }
-.stampListContainer {
-  padding-top: 1rem;
-}
 .stampList {
   width: fit-content;
   margin: auto auto;

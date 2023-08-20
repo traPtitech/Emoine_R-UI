@@ -16,7 +16,7 @@ const handlePutStamp = (stampId: string) => {
 
 <template>
   <ul :class="$style.stampList">
-    <li v-for="stamp in stamps" :key="stamp.stampId" :class="$style.stamp">
+    <li v-for="stamp in stamps" :key="stamp.stampId">
       <button
         :class="$style.stampButton"
         @click="handlePutStamp(stamp.stampId)"
@@ -37,10 +37,9 @@ const handlePutStamp = (stampId: string) => {
   display: flex;
   list-style: none;
 }
-.stamp {
-  padding: 0;
-}
 .stampButton {
+  display: flex;
+  align-items: center;
   padding: 0 0.5rem;
   &:hover {
     background-color: gray; // fixme: 下部になぜかpaddingらしきものがついている

@@ -32,7 +32,7 @@ const emit = defineEmits<{
 }
 .commentPanel {
   width: 30rem;
-  height: 100vh;
+  height: 100%;
   border-left: 1px solid $color-secondary;
 }
 </style>
