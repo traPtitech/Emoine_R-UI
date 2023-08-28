@@ -55,10 +55,18 @@ onMounted(() => {
         :class="$style.video"
       />
       <div :class="$style.stampListContainer">
-        <stamp-list :stamps="stamps" :class="$style.stampList" />
+        <stamp-list
+          :stamps="stamps"
+          :class="$style.stampList"
+          :event-id="eventId"
+        />
       </div>
     </div>
-    <comment-panel :comments="comments ?? []" :show-overlay="false" />
+    <comment-panel
+      :comments="comments ?? []"
+      :show-overlay="false"
+      :event-id="eventId"
+    />
   </div>
 </template>
 

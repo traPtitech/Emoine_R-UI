@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { useGeneralConnectClient } from '@/lib/connectClient'
+
 export interface Stamp {
   stampId: string
   stampName: string
   image: string
 }
 
-defineProps<{
+const props = defineProps<{
+  eventId: string
   stamps: Stamp[]
 }>()
 
-const handlePutStamp = (stampId: string) => {
-  console.log(`stamp: ${stampId}`)
+const client = useGeneralConnectClient()
+
+const handlePutStamp = async (stampId: string) => {
+  await client.sendReaction({ meetingId: props.eventId, stampId })
 }
 </script>
 
@@ -42,7 +47,7 @@ const handlePutStamp = (stampId: string) => {
   align-items: center;
   padding: 0 0.5rem;
   &:hover {
-    background-color: gray; // fixme: 下部になぜかpaddingらしきものがついている
+    background-color: gray;
   }
 }
 </style>
