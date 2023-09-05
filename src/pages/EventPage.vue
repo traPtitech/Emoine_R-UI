@@ -18,6 +18,7 @@ const eventId = getEventId(route.params.id)
 const event = ref<Meeting>()
 const comments = ref<Comment[]>()
 
+//TODO: スタンプをなんらかの方法で取ってくる
 const stamps: Stamp[] = Array(10).fill({
   stampId: 'aaa',
   stampName: 'bbb',
@@ -51,7 +52,8 @@ onMounted(() => {
   <div :class="$style.container">
     <div :class="$style.leftContainer">
       <iframe
-        src="https://www.youtube.com/embed/8Yxrw4GDqg4"
+        v-if="event"
+        :src="`https://www.youtube.com/embed/${event.videoId}`"
         :class="$style.video"
       />
       <div :class="$style.stampListContainer">
@@ -78,10 +80,10 @@ onMounted(() => {
 }
 .leftContainer {
   width: 100%;
-  padding: 1rem 4rem;
+  padding: 1rem 0;
 }
 .video {
-  width: 100%;
+  width: 100%; // TODO: でかすぎ
   aspect-ratio: 16 / 9;
 }
 .stampList {
