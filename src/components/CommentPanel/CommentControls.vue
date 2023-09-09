@@ -5,6 +5,13 @@ import BaseButton from '@/components/UI/BaseButton.vue'
 import ColorPicker from '@/components/CommentPanel/ColorPicker.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import type { TextColor } from '@/consts/colors'
+import { useGeneralConnectClient } from '@/lib/connectClient'
+
+const props = defineProps<{
+  eventId: string
+}>()
+
+const client = useGeneralConnectClient()
 
 const commentValue = ref('')
 const pickedColor = ref<TextColor>('#000000')
@@ -13,8 +20,15 @@ const isAnonymous = ref(false)
 const toggleIsAnonymous = () => {
   isAnonymous.value = !isAnonymous.value
 }
-const sendComment = () => {
-  //todo:コメントを送信する
+const sendComment = async () => {
+  if (!commentValue.value) return
+  await client.sendComment({
+    meetingId: props.eventId,
+    text: commentValue.value,
+    color: pickedColor.value,
+    isAnonymous: isAnonymous.value
+  })
+  commentValue.value = ''
 }
 </script>
 

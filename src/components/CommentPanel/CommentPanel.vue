@@ -5,6 +5,7 @@ import CommentControls from '@/components/CommentPanel/CommentControls.vue'
 import CommentPanelHeader from '@/components/CommentPanel/CommentPanelHeader.vue'
 
 defineProps<{
+  eventId: string
   comments: Comment[]
   showOverlay: boolean
 }>()
@@ -22,7 +23,7 @@ const emit = defineEmits<{
       @close-comment-panel="emit('popupCommentPanel')"
     />
     <comment-list :comments="comments" :class="$style.commentList" />
-    <comment-controls />
+    <comment-controls :event-id="eventId" />
   </div>
 </template>
 
@@ -31,8 +32,8 @@ const emit = defineEmits<{
   height: calc(100% - 160px);
 }
 .commentPanel {
-  width: 340px;
-  height: 100vh;
+  width: 30rem;
+  height: 100%;
   border-left: 1px solid $color-secondary;
 }
 </style>
