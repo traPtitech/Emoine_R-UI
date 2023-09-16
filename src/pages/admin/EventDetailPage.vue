@@ -6,10 +6,7 @@ import { getEventId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
-import {
-  Meeting,
-  Token
-} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
 import {
   useGeneralConnectClient,
   useAdminConnectClient
@@ -22,22 +19,22 @@ const route = useRoute()
 const router = useRouter()
 const eventId = getEventId(route.params.eventId)
 
-const eventDetail = ref<Meeting>()
+const eventDetail = ref<Event>()
 const tokens = ref<Token[]>()
 
 const fetchEventInformation = async () => {
-  const res = await client.getMeeting({ id: eventId })
-  if (!res.meeting) throw new Error('res.meeting is undefined')
-  eventDetail.value = res.meeting
+  const res = await client.getEvent({ id: eventId })
+  if (!res.event) throw new Error('res.event is undefined')
+  eventDetail.value = res.event
 }
 const fetchTokens = async () => {
-  const res = await adminClient.getTokens({ meetingId: eventId })
+  const res = await adminClient.getTokens({ eventId: eventId })
   tokens.value = res.tokens
 }
 const updateDescription = async (description: string) => {
   if (!eventDetail.value) return
-  await adminClient.updateMeeting({
-    meetingId: eventId,
+  await adminClient.updateEvent({
+    eventId: eventId,
     videoId: eventDetail.value.videoId,
     description: description
   })
@@ -45,7 +42,7 @@ const updateDescription = async (description: string) => {
 const deleteEvent = async () => {
   const result = confirm('本当にこのイベントを削除しますか？')
   if (!result) return
-  await adminClient.deleteMeeting({ meetingId: eventId })
+  await adminClient.deleteEvent({ eventId: eventId })
   router.push({ name: 'AdminEvents' })
 }
 

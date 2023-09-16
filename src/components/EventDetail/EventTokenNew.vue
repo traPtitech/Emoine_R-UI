@@ -29,7 +29,7 @@ const handleAddToken = async () => {
   // todo: error handling
   const res = await adminClient.generateToken({
     username: userName.value,
-    meetingId: eventId,
+    eventId: eventId,
     expireAt: Timestamp.fromDate(new Date(expireDate.value + ':00Z')), // fixme: https://github.com/traPtitech/traPortfolio-Dashboard/pull/64#discussion_r1174958146
     description: description.value
   })

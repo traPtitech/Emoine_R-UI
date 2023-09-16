@@ -1,20 +1,20 @@
 import { AdminAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_connect'
 import {
-  CreateMeetingResponse,
+  CreateEventResponse,
   GenerateTokenResponse,
   GetTokensResponse
 } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_pb'
 import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
 import {
-  GetMeetingCommentsResponse,
-  GetMeetingReactionsResponse,
-  GetMeetingResponse,
-  GetMeetingsResponse,
+  GetEventCommentsResponse,
+  GetEventReactionsResponse,
+  GetEventResponse,
+  GetEventsResponse,
   SendCommentResponse,
   SendReactionResponse
 } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_pb'
 import {
-  Meeting,
+  Event,
   Token,
   Comment,
   Reaction
@@ -23,12 +23,12 @@ import { randomDate, randomString } from '@/lib/random'
 import { ServiceImpl } from '@bufbuild/connect'
 import { Timestamp } from '@bufbuild/protobuf'
 
-export const exampleEvents = (n: number): Meeting[] =>
+export const exampleEvents = (n: number): Event[] =>
   Array(n)
     .fill(null)
     .map(
       () =>
-        new Meeting({
+        new Event({
           id: randomString(5, 32),
           videoId: randomString(5, 11),
           description: randomString(5, 100),
@@ -50,7 +50,7 @@ export const exampleTokens = (n: number): Token[] =>
           id: randomString(5, 32),
           raw: randomString(5, 30),
           username: randomString(5, 20),
-          meetingId: randomString(5, 32),
+          eventId: randomString(5, 32),
           creatorId: randomString(5, 32),
           description: randomString(5, 100),
           createdAt: Timestamp.fromDate(randomDate()),
@@ -65,7 +65,7 @@ export const exampleComments = (n: number): Comment[] =>
       () =>
         new Comment({
           id: randomString(5, 32),
-          meetingId: randomString(5, 32),
+          eventId: randomString(5, 32),
           username: randomString(5, 20),
           text: randomString(5, 100),
           isAnonymous: false,
@@ -81,7 +81,7 @@ export const exampleReactions = (n: number): Reaction[] =>
       () =>
         new Reaction({
           id: randomString(5, 32),
-          meetingId: randomString(5, 32),
+          eventId: randomString(5, 32),
           username: randomString(5, 20),
           stampId: randomString(5, 32),
           createdAt: Timestamp.fromDate(randomDate())
@@ -90,32 +90,32 @@ export const exampleReactions = (n: number): Reaction[] =>
 const exampleReaction = exampleReactions(1)[0]
 
 export const generalApiMock: Partial<ServiceImpl<typeof GeneralAPIService>> = {
-  getMeetings: () =>
-    new GetMeetingsResponse({
+  getEvents: () =>
+    new GetEventsResponse({
       total: 100,
-      meetings: exampleEvents(12)
+      events: exampleEvents(12)
     }),
-  getMeeting: () => new GetMeetingResponse({ meeting: exampleEvent }),
-  getMeetingComments: () =>
-    new GetMeetingCommentsResponse({
+  getEvent: () => new GetEventResponse({ event: exampleEvent }),
+  getEventComments: () =>
+    new GetEventCommentsResponse({
       comments: exampleComments(20)
     }),
-  getMeetingReactions: () =>
-    new GetMeetingReactionsResponse({
+  getEventReactions: () =>
+    new GetEventReactionsResponse({
       reactions: exampleReactions(10)
     }),
-  // connectToMeetingStream: () => {}, todo: streamingのmockの書き方が分からなかった
+  // connectToEventStream: () => {}, todo: streamingのmockの書き方が分からなかった
   sendComment: () => new SendCommentResponse({ comment: exampleComment }),
   sendReaction: () => new SendReactionResponse({ reaction: exampleReaction })
 }
 
 export const adminApiMock: ServiceImpl<typeof AdminAPIService> = {
-  createMeeting: () =>
-    new CreateMeetingResponse({
-      meeting: exampleEvent
+  createEvent: () =>
+    new CreateEventResponse({
+      event: exampleEvent
     }),
-  updateMeeting: () => ({}),
-  deleteMeeting: () => ({}),
+  updateEvent: () => ({}),
+  deleteEvent: () => ({}),
   getTokens: () =>
     new GetTokensResponse({
       tokens: exampleTokens(12)
