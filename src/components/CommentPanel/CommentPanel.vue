@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CommentList from '@/components/CommentPanel/CommentList.vue'
-import { Comment } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Comment } from '@/lib/apis'
 import CommentControls from '@/components/CommentPanel/CommentControls.vue'
 import CommentPanelHeader from '@/components/CommentPanel/CommentPanelHeader.vue'
 

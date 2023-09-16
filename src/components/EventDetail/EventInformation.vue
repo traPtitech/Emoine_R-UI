@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { Event } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import { formatDateTime } from '@/lib/date'
 import { useMenuModal } from '@/composables/useMenuModal'
 import { MenuItem } from '@/components/UI/MenuModal.vue'

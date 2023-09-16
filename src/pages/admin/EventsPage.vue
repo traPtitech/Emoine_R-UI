@@ -6,7 +6,7 @@ import EventItem from '@/components/Events/EventItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
-import { Event } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import { useGeneralConnectClient } from '@/lib/connectClient'
 
 const client = useGeneralConnectClient()

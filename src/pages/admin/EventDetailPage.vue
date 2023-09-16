@@ -6,7 +6,7 @@ import { getEventId } from '@/lib/parsePathParams'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
 import EventInformation from '@/components/EventDetail/EventInformation.vue'
-import { Event, Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, Token } from '@/lib/apis'
 import {
   useGeneralConnectClient,
   useAdminConnectClient

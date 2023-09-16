@@ -13,12 +13,7 @@ import {
   SendCommentResponse,
   SendReactionResponse
 } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_pb'
-import {
-  Event,
-  Token,
-  Comment,
-  Reaction
-} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, Token, Comment, Reaction } from '@/lib/apis'
 import { randomDate, randomString } from '@/lib/random'
 import { ServiceImpl } from '@bufbuild/connect'
 import { Timestamp } from '@bufbuild/protobuf'

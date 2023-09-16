@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Token } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Token } from '@/lib/apis'
 import { formatDate } from '@/lib/date'
 import AIcon from '@/components/UI/AIcon.vue'
 import EmoineIcon from '@/components/UI/EmoineIcon.vue'

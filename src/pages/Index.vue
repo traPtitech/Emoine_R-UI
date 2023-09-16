@@ -5,7 +5,7 @@ import { getCurrentPage } from '@/lib/parseQueryParams'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import EventThumbnail from '@/components/EventThumbnail/EventThumbnail.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
-import { Event } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import { useGeneralConnectClient } from '@/lib/connectClient'
 
 const client = useGeneralConnectClient()

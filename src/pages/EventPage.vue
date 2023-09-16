@@ -6,10 +6,7 @@ import CommentPanel from '@/components/CommentPanel/CommentPanel.vue'
 import StampList from '@/components/StampList/StampList.vue'
 import { Stamp } from '@/components/StampList/StampList.vue'
 import { useGeneralConnectClient } from '@/lib/connectClient'
-import {
-  Event,
-  Comment
-} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, Comment } from '@/lib/apis'
 
 const route = useRoute()
 const client = useGeneralConnectClient()
