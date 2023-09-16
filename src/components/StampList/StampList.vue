@@ -15,7 +15,7 @@ const props = defineProps<{
 const client = useGeneralConnectClient()
 
 const handlePutStamp = async (stampId: string) => {
-  await client.sendReaction({ meetingId: props.eventId, stampId })
+  await client.sendReaction({ eventId: props.eventId, stampId })
 }
 </script>
 

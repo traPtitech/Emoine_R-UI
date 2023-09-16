@@ -6,7 +6,7 @@
     "build": "vite build",
     "lint": "eslint --ext .ts,.vue src",
     "type-check": "vue-tsc --noEmit",
-    "gen-api": "node ./scripts/gen-api.js && buf generate https://github.com/traPtitech/Emoine_R.git#subdir=api/proto",
+    "gen-api": "buf generate https://github.com/traPtitech/Emoine_R.git#subdir=api/proto",
     "start-mock": "prism mock -p 8090 -d https://raw.githubusercontent.com/traPtitech/Emoine_R/main/docs/openapi.yml"
   },
   "dependencies": {

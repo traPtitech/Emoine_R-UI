@@ -6,16 +6,13 @@ import CommentPanel from '@/components/CommentPanel/CommentPanel.vue'
 import StampList from '@/components/StampList/StampList.vue'
 import { Stamp } from '@/components/StampList/StampList.vue'
 import { useGeneralConnectClient } from '@/lib/connectClient'
-import {
-  Meeting,
-  Comment
-} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event, Comment } from '@/lib/apis'
 
 const route = useRoute()
 const client = useGeneralConnectClient()
 
 const eventId = getEventId(route.params.id)
-const event = ref<Meeting>()
+const event = ref<Event>()
 const comments = ref<Comment[]>()
 
 //TODO: スタンプをなんらかの方法で取ってくる
@@ -25,17 +22,17 @@ const stamps: Stamp[] = Array(10).fill({
   image: 'https://q.trap.jp/api/v3/public/icon/mehm8128'
 })
 
-const fetchMeeting = async () => {
+const fetchevent = async () => {
   //todo: エラーハンドリング
-  const res = await client.getMeeting({ id: eventId })
-  if (!res.meeting) {
-    throw new Error('res.meeting is undefined')
+  const res = await client.getEvent({ id: eventId })
+  if (!res.event) {
+    throw new Error('res.event is undefined')
   }
-  event.value = res.meeting
+  event.value = res.event
 }
 const fetchComments = async () => {
   //todo: エラーハンドリング
-  const res = await client.getMeetingComments({ meetingId: eventId })
+  const res = await client.getEventComments({ eventId: eventId })
   if (!res.comments) {
     throw new Error('res.comment is undefined')
   }
@@ -43,7 +40,7 @@ const fetchComments = async () => {
 }
 
 onMounted(() => {
-  fetchMeeting()
+  fetchevent()
   fetchComments()
 })
 </script>

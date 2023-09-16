@@ -1,5 +1,1 @@
-import { Apis, Configuration } from './generated'
-const apis = new Apis(new Configuration({ basePath: '/api' }))
-
-export default apis
-export * from './generated'
+export * from './generated/proto/emoine_r/v1/schema_pb'

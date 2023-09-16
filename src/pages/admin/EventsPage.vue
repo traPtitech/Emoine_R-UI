@@ -6,7 +6,7 @@ import EventItem from '@/components/Events/EventItem.vue'
 import AIcon from '@/components/UI/AIcon.vue'
 import PaginationBar from '@/components/UI/PaginationBar.vue'
 import EmoineHeader from '@/components/EmoineHeader.vue'
-import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import { useGeneralConnectClient } from '@/lib/connectClient'
 
 const client = useGeneralConnectClient()
@@ -21,14 +21,14 @@ watch(
   }
 )
 
-const events = ref<Meeting[]>()
+const events = ref<Event[]>()
 const totalEventsCount = ref()
 const constructLink = (page: number) => `?page=${page}`
 
 const fetchEvents = async () => {
   //todo: エラーハンドリング
-  const res = await client.getMeetings({ limit: 10, offset: page.value })
-  events.value = res.meetings
+  const res = await client.getEvents({ limit: 10, offset: page.value })
+  events.value = res.events
   totalEventsCount.value = res.total
 }
 

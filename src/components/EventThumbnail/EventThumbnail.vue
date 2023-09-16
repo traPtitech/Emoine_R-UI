@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import DateChip from '@/components/UI/DateChip.vue'
 import { toDayjs } from '@/lib/date'
 
-defineProps<{ event: Meeting }>()
+defineProps<{ event: Event }>()
 </script>
 
 <template>

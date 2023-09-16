@@ -27,12 +27,12 @@ const createEvent = async () => {
   let id = ''
   try {
     const videoId = getLiveIdFromUrl(liveUrl.value)
-    const res = await adminClient.createMeeting({
+    const res = await adminClient.createEvent({
       videoId: videoId,
       description: ''
     })
-    if (!res.meeting) throw new Error('response.meeting is undefined')
-    id = res.meeting.id
+    if (!res.event) throw new Error('response.event is undefined')
+    id = res.event.id
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message)

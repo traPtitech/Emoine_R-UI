@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { Meeting } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Event } from '@/lib/apis'
 import { RouterLink } from 'vue-router'
 import AIcon from '@/components/UI/AIcon.vue'
 import DateChip from '@/components/UI/DateChip.vue'
 import { toDayjs } from '@/lib/date'
 
 defineProps<{
-  event: Meeting
+  event: Event
 }>()
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Comment } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Comment } from '@/lib/apis'
 import CommentItem from '@/components/CommentPanel/CommentItem.vue'
 
 defineProps<{

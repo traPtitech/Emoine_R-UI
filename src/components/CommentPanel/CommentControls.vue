@@ -23,7 +23,7 @@ const toggleIsAnonymous = () => {
 const sendComment = async () => {
   if (!commentValue.value) return
   await client.sendComment({
-    meetingId: props.eventId,
+    eventId: props.eventId,
     text: commentValue.value,
     color: pickedColor.value,
     isAnonymous: isAnonymous.value
