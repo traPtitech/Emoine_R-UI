@@ -157,7 +157,6 @@ onMounted(async () => {
 .leftContainer {
   width: 100%;
   padding: 1rem 0;
-  margin: 1rem 4rem;
 }
 .video {
   width: 100%; // TODO: でかすぎ
