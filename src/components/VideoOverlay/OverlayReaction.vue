@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { Reaction } from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Reaction } from '@/lib/apis'
+import { ref } from 'vue'
 
 defineProps<{
   reaction: Reaction
 }>()
+
+// TODO: stampIdから画像を取得
+const reactionImg = ref('https://q.trap.jp/api/v3/public/icon/mehm8128')
 </script>
 
 <template>
   <img
-    :src="'https://q.trap.jp/api/v3/public/icon/mehm8128'"
+    :src="reactionImg"
     :style="{
       top: `${Math.random() * 90}%`,
       left: `${Math.random() * 90}%`

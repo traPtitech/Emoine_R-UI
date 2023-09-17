@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import OverlayComment from './OverlayComment.vue'
 import OverlayReaction from './OverlayReaction.vue'
-import {
-  Comment,
-  Reaction
-} from '@/lib/apis/generated/proto/emoine_r/v1/schema_pb'
+import { Comment, Reaction } from '@/lib/apis'
 
 defineProps<{
   comments: Comment[]
