@@ -24,6 +24,7 @@ defineProps<{
   font-size: 2rem;
   right: 0;
   animation: commentMove 8s linear;
+  pointer-events: none;
 }
 @keyframes commentMove {
   0% {

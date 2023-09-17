@@ -27,6 +27,7 @@ const reactionImg = ref('https://q.trap.jp/api/v3/public/icon/mehm8128')
   width: 100px;
   height: 100px;
   animation: stampZoom 0.4s linear;
+  pointer-events: none;
 }
 @keyframes stampZoom {
   0% {
