@@ -6,6 +6,7 @@ import {
 } from '@/lib/apis/generated/proto/emoine_r/v1/admin_api_pb'
 import { GeneralAPIService } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_connect'
 import {
+  ConnectToEventStreamResponse,
   GetEventCommentsResponse,
   GetEventReactionsResponse,
   GetEventResponse,
@@ -14,7 +15,7 @@ import {
   SendReactionResponse
 } from '@/lib/apis/generated/proto/emoine_r/v1/general_api_pb'
 import { Event, Token, Comment, Reaction } from '@/lib/apis'
-import { randomDate, randomString } from '@/lib/random'
+import { randomDate, randomSleep, randomString } from '@/lib/random'
 import { ServiceImpl } from '@bufbuild/connect'
 import { Timestamp } from '@bufbuild/protobuf'
 
@@ -99,7 +100,26 @@ export const generalApiMock: Partial<ServiceImpl<typeof GeneralAPIService>> = {
     new GetEventReactionsResponse({
       reactions: exampleReactions(10)
     }),
-  // connectToEventStream: () => {}, todo: streamingのmockの書き方が分からなかった
+  connectToEventStream: async function* connectToEventStream() {
+    const comments = exampleComments(10)
+    const reactions = exampleReactions(10)
+    for (let i = 0; i < 10; i++) {
+      await randomSleep()
+      yield new ConnectToEventStreamResponse({
+        streamEvent: {
+          value: comments[i],
+          case: 'comment'
+        }
+      })
+      await randomSleep()
+      yield new ConnectToEventStreamResponse({
+        streamEvent: {
+          value: reactions[i],
+          case: 'reaction'
+        }
+      })
+    }
+  },
   sendComment: () => new SendCommentResponse({ comment: exampleComment }),
   sendReaction: () => new SendReactionResponse({ reaction: exampleReaction })
 }

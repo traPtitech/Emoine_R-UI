@@ -1,3 +1,4 @@
+import { LiveStatus } from '@/consts/status'
 import { Timestamp } from '@bufbuild/protobuf'
 import dayjs, { Dayjs } from 'dayjs'
 
@@ -24,4 +25,14 @@ export const formatDate = (timeStamp: Timestamp | undefined): string => {
 export const formatDateTime = (timeStamp: Timestamp | undefined): string => {
   const date = toDayjs(timeStamp)
   return date.format('YYYY/MM/DD HH:mm')
+}
+
+export const getEventStatus = (
+  startedTime: Dayjs,
+  endedTime: Dayjs
+): LiveStatus => {
+  /* todo: endedTimeが存在しないときのサーバーからのデータの仕様に合わせる */
+  if (startedTime.isAfter(Date.now())) return 'isPlanned'
+  if (!endedTime.isValid()) return 'isStreaming'
+  return 'isArchived'
 }
